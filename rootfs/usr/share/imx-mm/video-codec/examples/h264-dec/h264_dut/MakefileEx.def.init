@@ -1,0 +1,69 @@
+#/*
+# ***********************************************************************
+# * Copyright 2005-2007 by Freescale Semiconductor, Inc.
+# * All modifications are confidential and proprietary information
+# * of Freescale Semiconductor, Inc. ALL RIGHTS RESERVED.
+# ***********************************************************************
+# */
+
+# Toolchain settings, derived directories and naming convention
+#
+# History
+#   Date           Changed                                      By
+#   Nov. 13, 2007  Port from Makefile.init, Makefile_test.init. Zhenyong Chen
+#                  Add ARM11ELINUXNORVDS, ARM12LERVDS     
+#
+#*****************************************************************************
+
+#****** Foreign variables ****************************************************
+# ROOT_DIR - root
+# BUILD    - toolchain combination
+# BIN_TYPE - binary type: LIB or DLL or EXE
+# __cplusplus - whether g++ will be used. Affects linker and default library
+
+#****** derived directories **************************************************
+# Source code of library
+# c code
+CSRCS_DIR   = ./c_src
+# cpp code
+CPPSRCS_DIR = ./cpp_src
+# assembly code
+ASRCS_DIR   = ./asm_arm
+# hdr
+LOCAL_HEADER  = ./hdr
+
+# Library directory for codec libraries
+LIB_DIR = $(ROOT_DIR)/src/$(CODEC)
+# Common directory
+COMMON_DIR = $(ROOT_DIR)/common
+
+#****** Tool chain selection *************************************************
+BIN_TYPE ?= LIB
+include $(ROOT_DIR)/build/Makefile.toolchain.init
+
+# Some toolchain needs gnu assembly format, so redirect
+ifeq ($(TOOL_CHAIN),GNU)
+    ASRCS_DIR = ./asm_arm_gnu
+endif
+ifeq ($(TOOL_CHAIN),DVTK)
+    ASRCS_DIR = ./asm_arm_gnu
+endif
+ifeq ($(TOOL_CHAIN),MVISTA)
+    ASRCS_DIR = ./asm_arm_gnu
+endif
+
+
+#Define the include path
+INCLUDES   = -I$(ROOT_DIR)/ghdr -I$(COMMON_DIR)/hdr -I$(LOCAL_HEADER)
+INCLUDES += -I$(ROOT_DIR)/test/video_test/dut_hdr
+
+#****** Target naming ********************************************************
+PROGRAM     = $(CODEC)
+LIBRARY     = lib_$(PROGRAM)_$(TGT_CPU_BIN)_$(TGT_OS_BIN)
+LIBRARY_DEC = lib_$(PROGRAM)_dec_$(TGT_CPU_BIN)_$(TGT_OS_BIN)
+LIBRARY_ENC = lib_$(PROGRAM)_enc_$(TGT_CPU_BIN)_$(TGT_OS_BIN)
+
+#*****************************************************************************
+# Set the Common Defines DONE!!!
+#*****************************************************************************
+

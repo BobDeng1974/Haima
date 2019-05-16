@@ -1,0 +1,2 @@
+/bin/fatattr
+/bin/busybox.nosuid 50

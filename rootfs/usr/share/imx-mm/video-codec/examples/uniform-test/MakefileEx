@@ -1,0 +1,322 @@
+#/*
+# ***********************************************************************
+# * Copyright 2005-2008 by Freescale Semiconductor, Inc.
+# * All modifications are confidential and proprietary information
+# * of Freescale Semiconductor, Inc. ALL RIGHTS RESERVED.
+# ***********************************************************************
+# */
+
+# Makefile to compile denoise application for linux or simulator
+#
+# History
+#   Date           Changed                                      Changed by
+#   Jan. 15, 2008  Create                                       Zhenyong Chen
+#*****************************************************************************
+#
+# Deinterlace application Makefile
+#
+#*****************************************************************************
+CODEC=H264_dec
+
+
+###############################################################################
+# Variables
+# ROOT_DIR  - Root of VOB
+# BIN_TYPE
+# __cplusplus
+#
+# BUILD     - Toolchain combination
+# OPT_LEVEL - Optimization selection
+# RVDS_VERSION - Specify when RVDS toolchain is used
+# RELEASE   - Release or debug version
+# TIME_PROFILE_ENABLE - Enable/disable time profiling
+
+###############################################################################
+# Platform specification
+# ARM12LERVDS, ARM11LERVDS, ARM11ELINUXNORVDS
+BUILD ?= ARM11ELINUX
+
+# Tool chain settings according to platform
+ROOT_DIR = ../../..
+BIN_TYPE = EXE
+# This project contains c++ syntax
+__cplusplus = 1
+# Release or debug version
+RELEASE ?= 1
+
+include MakefileEx.test.def.init
+
+###############################################################################
+# Features support
+TIME_PROFILE_ENABLE ?= 1
+
+###############################################################################
+# Macros and supplemental compile options
+NONE_OS = 0
+# For Cortex, SoC
+ifeq ($(TGT_OS),LERVDS)
+    CDEFS += -DSoC
+  ifeq ($(TGT_CPU),ARM12)
+    CDEFS += -DSoC_Cortex
+  endif
+  ifeq ($(TGT_CPU),ARM11)
+    CDEFS += -DSoC_Arm1136
+  endif
+    NONE_OS = 1
+    TIME_PROFILE_ENABLE = 0 # not support
+endif # ifeq ($(TGT_OS),LERVDS)
+
+# For elinux
+ifeq ($(TGT_OS),ELINUX)
+    CDEFS += -D_LINUX
+endif # ifeq ($(BUILD),ARM11ELINUXNORVDS)
+
+# Profiling support
+ifeq ($(TIME_PROFILE_ENABLE),1)
+#  ifeq ($(BUILD),ARM11ELINUXNORVDS)
+    CDEFS += -DENABLE_TIME_PROFILE
+#  endif
+endif
+
+###############################################################################
+# Optimization level
+OPT_LEVEL ?= 0
+# 0 -- OPT_DEBUG; 1 -- OPT_ARM11; 2 -- OPT_NEON
+
+OPT_DEBUG  = 0
+OPT_ARM11  = 0
+OPT_NEON   = 0
+
+ifeq ($(OPT_LEVEL),0)
+    OPT_DEBUG = 1
+else
+  ifeq ($(OPT_LEVEL),1)
+     OPT_ARM11 = 1
+  else
+    ifeq ($(OPT_LEVEL),2)
+      OPT_NEON = 1
+    endif
+  endif
+endif
+
+
+ifeq ($(OPT_DEBUG),0)
+  ifeq ($(OPT_ARM11),1)
+    USE_ARM11_ASM = 1
+  else
+    USE_ARM11_ASM = 0
+  endif
+  ifeq ($(OPT_NEON),1)
+    USE_NEON_ASM = 1
+  else
+    USE_NEON_ASM = 0
+  endif
+else
+    CDEFS += -DOPT_DEBUG
+    USE_ARM11_ASM = 0
+    USE_NEON_ASM = 0
+endif
+
+ifeq ($(USE_ARM11_ASM),1)
+    CDEFS += -DOPT_ARM11
+    ifeq ($(USE_GCC),1)
+      AFLAGS += --defsym OPT_ARM11=1
+    else
+      AFLAGS += --pd "OPT_ARM11 SETL {TRUE}"
+    endif
+else
+    ifeq ($(USE_GCC),1)
+      AFLAGS += --defsym OPT_ARM11=0
+    else
+      AFLAGS += --pd "OPT_ARM11 SETL {FALSE}"
+    endif
+endif
+ifeq ($(USE_NEON_ASM),1)
+    CDEFS += -DOPT_NEON
+    ifeq ($(USE_GCC),1)
+      AFLAGS += --defsym OPT_NEON=1
+    else
+      AFLAGS += --pd "OPT_NEON SETL {TRUE}"
+    endif
+else
+    ifeq ($(USE_GCC),1)
+      AFLAGS += --defsym OPT_NEON=0
+    else
+      AFLAGS += --pd "OPT_NEON SETL {FALSE}"
+    endif
+endif
+
+
+ifeq ($(RELEASE),1)
+    CDEFS += -D_RELEASE
+else
+    CDEFS += -D_DEBUG
+endif
+
+# Program defined macros
+ifeq ($(TGT_OS),LERVDS)
+  CDEFS += -DARMULATOR
+endif
+
+ifeq ($(TGT_OS),BERVDS)
+  CDEFS += -DARMULATOR
+endif
+
+# hardware deblock: only allowed for arm11 (elinux or wince)
+ifeq ($(TGT_CPU),ARM11)
+  ifeq ($(TGT_OS),ELINUX)
+      CDEFS += -DHW_DEBLOCK -DDR_LINUX_TEST
+  endif
+  ifeq ($(TGT_OS),WINCE)
+      CDEFS += -DHW_DEBLOCK # cannot do direct render test
+  endif
+endif
+
+# dynamic library accessing support
+ifdef USE_DLL
+  ifeq ($(USE_DLL),1)
+    CDEFS += -DUSE_DLL
+    ifeq ($(TGT_OS),UNIX)
+    LFLAGS += -ldl
+    endif
+    ifeq ($(TGT_OS),ELINUX)
+    LFLAGS += -ldl
+    endif
+  endif
+endif
+
+# GUI support on UNIX
+ifeq ($(TGT_OS),UNIX)
+  X11_ENABLE ?= 1
+  ifeq ($(X11_ENABLE),1)
+    CDEFS += -DENABLE_X11
+    LIBRARY +=  -L/usr/lib/ -lX11
+  endif
+endif
+
+###############################################################################
+# Derived directories
+#MW_DIR    = ../../midware
+APP_DIR   = .
+#INCLUDES += -I$(MW_DIR)/hdr
+INCLUDES += -I$(APP_DIR)/hdr
+
+ifeq ($(NONE_OS),1)
+  ifneq ($(TGT_CPU),ARM9)
+    ifneq ($(TGT_CPU),ARM11) # remove startup code; if SoC is used, remove this
+    PLATFORM_DIR = $(ROOT_DIR)/test/misc/No_OS
+    INCLUDES += -I$(PLATFORM_DIR)
+
+    ifeq ($(TGT_CPU),ARM12)
+      LFLAGS += --scatter  $(PLATFORM_DIR)/Cortex/sort.scat --entry 0x0
+    endif
+    ifeq ($(TGT_CPU),ARM11)
+      LFLAGS += --info totals --info unused --map --list $@.map --ro-base 0x0 --rw-base 0x02000000 --first "vectors.o(Vect)" --entry 0x0
+      # Arm11_LD_FLAGS = --info totals --info unused --map --list $@.map --ro-base 0x0 --rw-base 0x02000000 --first "$(HEADER)(Vect)" --entry 0x0
+    endif
+    endif # !ARM11
+  endif # !ARM9
+endif
+###############################################################################
+# Objects
+# Put the Cpp files here
+CPP_OBJS = 
+
+# Put the C files here
+C_OBJS  += $(APP_DIR)/src/video_test.o \
+           $(APP_DIR)/src/YUVDisplayer.o \
+           $(APP_DIR)/src/ui.o
+
+ifeq ($(TGT_OS),UNIX)
+C_OBJS  += $(APP_DIR)/src/ColorConversion_Safe.o
+endif
+ifeq ($(TGT_OS),ELINUX)
+C_OBJS  += $(APP_DIR)/src/render_lcd.o
+endif
+
+
+# Put the asm files here
+ASM_OBJS =
+
+# Put midware files here
+MW_OBJS =
+
+# Put platform support files here
+ifeq ($(NONE_OS),1)
+  ifneq ($(TGT_CPU),ARM9)
+    ifneq ($(TGT_CPU),ARM11) # remove startup code; if SoC is used, remove this
+      PLATFORM_LIB = $(PLATFORM_DIR)/lib_platform_$(TGT_CPU_BIN)_$(TGT_OS_BIN).a
+      HEADER       = vectors.o
+      LIBRARY     += $(PLATFORM_LIB)
+      HEADER_OBJ   = $(PLATFORM_DIR)/$(HEADER)
+      HEADER_SRC   = $(PLATFORM_DIR)/vectors_$(BUILD).o # src of vectors.o
+    endif # !ARM11
+  endif # !ARM9
+else
+
+endif
+
+ALL_OBJS = $(C_OBJS) $(CPP_OBJS) $(ASM_OBJS) $(MW_OBJS)
+
+CFLAGS += $(CDEFS)
+###############################################################################
+# Targets
+
+.PHONY : help
+help:
+	@echo make [Options] all
+	@echo Options:
+	@echo "    BUILD={ARM11ELINUX,ARM11LERVDS,UNIX} Default to ARM11ELINUX"
+	@echo "    RVDS_VERSION={2_2,3_0,3_1} Default to 2_2 (2.2). This is used when RVDS is selected for building"
+	@echo "    TIME_PROFILE_ENABLE={0,1} Whether time profiling enabled. Default to 1"
+	@echo "    RELEASE={0,1} 0 - Debug version; 1 - Release version. Default to 1"
+	@echo "    OPT_LEVEL={0,1,2} 0 - c; 1 - Arm11 asm; 2 - Neon asm. Default to 0"
+	@echo "    BIN_TYPE={DLL,LIB,EXE} Default to EXE. Here DLL and LIB are forbidden"
+	@echo "    USE_DLL=1  Link with shared library when specified; otherwise link with static library"
+	@echo "      Special note: if USE_DLL is not set 1, then static link is enabled. In this case, a codec library should be specified by setting following macros in your command line:"
+	@echo "      ADDITIONAL_LIBRARY=<path_name> Provide special video codec static library full path and name"
+	@echo "    X11_ENABLE={0,1} For BUILD=UNIX; if enabled, playback window is supported"
+	@echo  
+
+.PHONY : all
+all :  $(PROGRAM).axf
+
+$(PROGRAM).axf : $(ALL_OBJS) $(HEADER_SRC) #$(LIBRARY) : here LIBRARY is not only library; also includes LFLAGS. Split?
+  # check condition
+ifneq ($(USE_DLL),1)
+  ifndef ADDITIONAL_LIBRARY
+	@echo "WARNING: no video codec is specified for static linked program. The final program may failed to build."
+  endif
+endif
+  # copy needed files
+ifeq ($(NONE_OS),1)
+  ifneq ($(TGT_CPU),ARM9)
+    ifneq ($(TGT_CPU),ARM11) # remove startup code; if SoC is used, remove this
+	@cp $(HEADER_SRC) $(HEADER_OBJ)
+    endif
+  endif # !ARM9
+endif
+	@echo BUILD=$(BUILD) OPT_LEVEL=$(OPT_LEVEL) OPT_DEBUG=$(OPT_DEBUG) OPT_ARM11=$(OPT_ARM11) OPT_NEON=$(OPT_NEON)
+	$(LD) -o $@ $(ALL_OBJS) $(HEADER_OBJ) $(LIBRARY) $(LFLAGS)
+#	$(FROMELF) --text -s $(PROGRAM) --output info.txt
+	@echo "--- Build finished ---"
+
+
+.PHONY : clean
+clean:
+	-rm -f $(ALL_OBJS) $(HEADER_OBJ) $(PROGRAM).axf
+
+# Pre- & Post-compile
+ifeq ($(BUILD),ARM11ELINUXNORVDS)
+PRE_COMPILE_C_CMD = #splint -noeffect -likelybool +ptrnegate -boolops -predboolint -aliasunique +matchanyintegral -exportlocal -shiftimplementation $(CDEFS) $(INCLUDES) $<
+else
+PRE_COMPILE_C_CMD =
+endif
+POST_COMPILE_C_CMD =
+
+PRE_COMPILE_CPP_CMD = #$(PRE_COMPILE_C_CMD)
+POST_COMPILE_CPP_CMD =
+
+PRE_COMPILE_AS_CMD =
+POST_COMPILE_AS_CMD =
+

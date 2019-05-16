@@ -1,0 +1,14 @@
+prefix=/home/bamboo/build/3.14.52-1.1.0/fsl-imx-fb/temp_build_dir/build_fsl-imx-fb/tmp/sysroots/imx6qdlsolo/usr
+exec_prefix=${prefix}
+libdir=/usr/lib
+includedir=/usr/include/qt5
+
+
+Name: Qt5 SystemInfo
+Description: Qt SystemInfo module
+Version: 5.4.0
+Libs: -L${libdir} -lQt5SystemInfo 
+Libs.private: -ludev -lbluetooth -lQt5Network -lQt5DBus -lQt5Core -lpthread   
+Cflags: -I${includedir}/QtSystemInfo -I${includedir}
+Requires: Qt5Core Qt5Network Qt5DBus
+

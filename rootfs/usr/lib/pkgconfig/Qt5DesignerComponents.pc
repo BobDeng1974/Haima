@@ -1,0 +1,14 @@
+prefix=/home/bamboo/build/3.14.52-1.1.0/fsl-imx-fb/temp_build_dir/build_fsl-imx-fb/tmp/sysroots/imx6qdlsolo/usr
+exec_prefix=${prefix}
+libdir=/usr/lib
+includedir=/usr/include/qt5
+
+
+Name: Qt5 DesignerComponents
+Description: Qt DesignerComponents module
+Version: 5.5.1
+Libs: -L${libdir} -lQt5DesignerComponents 
+Libs.private:  -lQt5Designer -lQt5Widgets -lQt5Gui -lQt5Xml -lQt5Core -lpthread -lQt5Xml -lQt5Core -lpthread -lGLESv2 -lEGL  
+Cflags: -I${includedir}/QtDesignerComponents -I${includedir}
+Requires: Qt5Core Qt5Gui Qt5Widgets Qt5Designer
+

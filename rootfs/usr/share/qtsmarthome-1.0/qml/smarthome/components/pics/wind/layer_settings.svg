@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="800"
+   height="480"
+   viewBox="0 0 800 480"
+   id="Ebene_1"
+   xml:space="preserve"><defs
+   id="defs11"><filter
+     x="-0.25"
+     y="-0.25"
+     width="1.5"
+     height="1.5"
+     color-interpolation-filters="sRGB"
+     id="filter2877"><feGaussianBlur
+       result="blur"
+       stdDeviation="2,000000"
+       in="SourceAlpha"
+       id="feGaussianBlur2879" /><feColorMatrix
+       values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0,500000 0 "
+       type="matrix"
+       result="bluralpha"
+       id="feColorMatrix2881" /><feOffset
+       result="offsetBlur"
+       dy="4,000000"
+       dx="4,000000"
+       in="bluralpha"
+       id="feOffset2883" /><feMerge
+       result="fbSourceGraphic"
+       id="feMerge2885"><feMergeNode
+         in="offsetBlur"
+         id="feMergeNode2887" /><feMergeNode
+         in="SourceGraphic"
+         id="feMergeNode2889" /></feMerge><feColorMatrix
+       id="feColorMatrix2891"
+       values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+       in="fbSourceGraphic"
+       result="fbSourceGraphicAlpha" /><feGaussianBlur
+       result="blur"
+       stdDeviation="2,000000"
+       in="fbSourceGraphicAlpha"
+       id="feGaussianBlur2893" /><feColorMatrix
+       values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0,500000 0 "
+       type="matrix"
+       result="bluralpha"
+       id="feColorMatrix2895" /><feOffset
+       result="offsetBlur"
+       dy="4,000000"
+       dx="4,000000"
+       in="bluralpha"
+       id="feOffset2897" /><feMerge
+       id="feMerge2899"><feMergeNode
+         in="offsetBlur"
+         id="feMergeNode2901" /><feMergeNode
+         in="fbSourceGraphic"
+         id="feMergeNode2903" /></feMerge></filter></defs>
+<g
+   id="g3"
+   style="opacity:0.9;filter:url(#filter2877)">
+	<path
+   d="M 27.5,462 C 20.056,462 14,455.944 14,448.5 V 70.5 C 14,63.056 20.056,57 27.5,57 h 747 c 7.444,0 13.5,6.056 13.5,13.5 v 378 c 0,7.444 -6.056,13.5 -13.5,13.5 h -747 z"
+   id="path5"
+   style="fill:#1a1a1a" />
+	<path
+   d="m 774.5,59 c 6.6,0 11.5,4.9 11.5,11.5 v 378 c 0,6.6 -4.9,12.5 -11.5,12.5 H 27.5 C 20.9,461 15,455.1 15,448.5 V 70.5 C 15,63.9 20.9,59 27.5,59 H 774 m 0.5,-3 H 27.5 C 19.229,56 12,62.229 12,70.5 v 378 c 0,8.271 7.229,15.5 15.5,15.5 h 747 c 8.271,0 14.5,-7.229 14.5,-15.5 V 70.5 C 789,62.229 782.771,56 774.5,56 l 0,0 z"
+   id="path7"
+   style="fill:#cccccc" />
+</g>
+</svg>

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=TSHConfig
+GenericName=Surroundview Config
+GenericName[zh_CN]=全景配置
+Comment=360 Surroundview Config
+Comment[zh_CN]=360全景配置
+Exec=/home/tsh/bin/tshconfig
+Terminal=false
+Icon=/home/tsh/res/tshconfig.png
+Type=Application

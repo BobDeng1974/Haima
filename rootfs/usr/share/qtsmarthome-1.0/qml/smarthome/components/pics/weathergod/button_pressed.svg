@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="50"
+   height="50"
+   viewBox="0 0 50 50"
+   id="Ebene_1"
+   xml:space="preserve"><defs
+   id="defs27"><filter
+     color-interpolation-filters="sRGB"
+     id="filter3611"><feGaussianBlur
+       id="feGaussianBlur3613"
+       stdDeviation="0.75" /></filter></defs>
+<g
+   id="g3">
+	
+	<g
+   id="g7">
+		<circle
+   cx="25"
+   cy="24.999001"
+   r="25"
+   transform="translate(0,2)"
+   id="circle2837"
+   style="opacity:0.65;fill:#000000;filter:url(#filter3611)" /><circle
+   cx="25"
+   cy="24.999001"
+   r="25"
+   id="circle9"
+   style="fill:#8cc63f" />
+		
+			<radialGradient
+   cx="4.9404001"
+   cy="-13.7588"
+   r="62.584999"
+   id="SVGID_1_"
+   gradientUnits="userSpaceOnUse"
+   gradientTransform="matrix(0.7143,0,0,0.7143,8.4805,14.8096)">
+			<stop
+   id="stop12"
+   style="stop-color:#ffffff;stop-opacity:1"
+   offset="0" />
+			<stop
+   id="stop14"
+   style="stop-color:#616161;stop-opacity:1"
+   offset="1" />
+		</radialGradient>
+		<path
+   d="M 24.999,48 C 12.317,48 2,37.682 2,24.999 2,12.317 12.317,2 24.999,2 37.682,2 48,12.317 48,24.999 48,37.682 37.682,48 24.999,48 z"
+   id="path16"
+   style="fill:url(#SVGID_1_)" />
+	</g>
+</g>
+<linearGradient
+   x1="24.9995"
+   y1="28.8311"
+   x2="24.9995"
+   y2="2.1431"
+   id="SVGID_2_"
+   gradientUnits="userSpaceOnUse">
+	<stop
+   id="stop19"
+   style="stop-color:#ffffff;stop-opacity:0"
+   offset="0" />
+	<stop
+   id="stop21"
+   style="stop-color:#ffffff;stop-opacity:1"
+   offset="1" />
+</linearGradient>
+<path
+   d="m 24.998,18.925 c 8.864,0 16.836,3.822 22.354,9.906 0.232,-1.292 0.357,-2.62 0.357,-3.978 C 47.709,12.31 37.543,2.142 24.998,2.142 12.456,2.143 2.29,12.311 2.29,24.854 c 0,1.357 0.125,2.686 0.354,3.978 5.521,-6.085 13.49,-9.907 22.354,-9.907 z"
+   id="path23"
+   style="fill:url(#SVGID_2_)" />
+</svg>

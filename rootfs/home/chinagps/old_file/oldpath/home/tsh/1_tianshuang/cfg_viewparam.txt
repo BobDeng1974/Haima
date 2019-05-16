@@ -1,0 +1,13 @@
+# FB range,radian,xoffset,yoffset,hwratio
+2D_FRONT=65,1.4,0,0,1
+2D_BACK=65,1.4,0,0,1
+# LR scale,func,offset,yoffset,whratio,xscroll
+2D_LFRONT=1,1,0,0,1,0
+2D_RFRONT=1,1,0,0,1,0
+2D_LBACK=1,2,0,0,1,0
+2D_RBACK=1,2,0,0,1,0
+# WIDE VIEW HRatio
+2D_WIDEVIEW=0.8
+# WIDE VIEW scale,LAngle,RAngle
+2D_FWIDEVIEW=1,50,50
+2D_BWIDEVIEW=1,50,50

@@ -1,0 +1,15 @@
+prefix=/home/bamboo/build/3.14.52-1.1.0/fsl-imx-fb/temp_build_dir/build_fsl-imx-fb/tmp/sysroots/imx6qdlsolo/usr
+exec_prefix=${prefix}
+libdir=/usr/lib
+includedir=/usr/include/qt5
+
+host_bins=/usr/bin/qt5
+qt_config=minimal-config small-config medium-config large-config full-config libudev evdev c++11 accessibility egl eglfs eglfs_viv opengl opengles2 shared qpa reduce_exports clock-gettime clock-monotonic posix_fallocate mremap getaddrinfo ipv6ifname getifaddrs inotify eventfd system-jpeg system-png png freetype no-harfbuzz system-zlib dbus openssl-linked pulseaudio gstreamer-1.0 concurrent audio-backend release
+
+Name: Qt5 Core
+Description: Qt Core module
+Version: 5.5.1
+Libs: -L${libdir} -lQt5Core 
+Libs.private: -lpthread -lz  -lqtpcre -lm -ldl -lrt  
+Cflags: -I${includedir}/QtCore -I${includedir}
+

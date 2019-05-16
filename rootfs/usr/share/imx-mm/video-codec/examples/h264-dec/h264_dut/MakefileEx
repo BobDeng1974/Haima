@@ -1,0 +1,258 @@
+#/*
+# ***********************************************************************
+# * Copyright 2005-2008 by Freescale Semiconductor, Inc.
+# * All modifications are confidential and proprietary information
+# * of Freescale Semiconductor, Inc. ALL RIGHTS RESERVED.
+# ***********************************************************************
+# */
+
+# Makefile to compile denoise library for linux or SoC Simulator
+#
+# History
+#   Date           Changed                                      Changed by
+#   Jan. 15, 2008  Create                                       Zhenyong Chen
+#*****************************************************************************
+#
+# H264_dec Library Makefile
+#
+#*****************************************************************************
+CODEC=H264_dec
+WRAPPER_NAME=libDutDecH264
+
+
+###############################################################################
+# Variables
+# ROOT_DIR  - Root of VOB
+# BIN_TYPE
+# __cplusplus
+#
+# BUILD     - Toolchain combination
+# OPT_LEVEL - Optimization selection
+# RVDS_VERSION - Specify when RVDS toolchain is used
+# RELEASE   - Release or debug version
+# TIME_PROFILE_ENABLE - Enable/disable time profiling
+
+###############################################################################
+# Platform specification
+# ARM12LERVDS, ARM11LERVDS, ARM11ELINUXNORVDS
+BUILD ?= ARM11ELINUX
+
+# Tool chain settings according to platform
+ROOT_DIR = ../../..
+BIN_TYPE = LIB
+# This project contains no c++ syntax
+__cplusplus = 0
+# Release or debug version
+RELEASE ?= 1
+
+include MakefileEx.def.init
+
+###############################################################################
+# Features support
+TIME_PROFILE_ENABLE ?= 1
+
+###############################################################################
+# Macros and supplemental compile options
+NONE_OS = 0
+# For Cortex, SoC
+ifeq ($(TGT_OS),LERVDS)
+    CDEFS += -DSoC
+  ifeq ($(TGT_CPU),ARM12)
+    CDEFS += -DSoC_Cortex
+  endif
+  ifeq ($(TGT_CPU),ARM11)
+    CDEFS += -DSoC_Arm1136
+  endif
+    NONE_OS = 1
+    TIME_PROFILE_ENABLE = 0 # not support
+endif # ifeq ($(TGT_OS),LERVDS)
+
+# For elinux
+ifeq ($(TGT_OS),ELINUX)
+    CDEFS += -D_LINUX
+endif # ifeq ($(BUILD),ARM11ELINUXNORVDS)
+
+# Profiling support
+ifeq ($(TIME_PROFILE_ENABLE),1)
+#  ifeq ($(BUILD),ARM11ELINUXNORVDS)
+    CDEFS += -DTIME_PROFILE
+#  endif
+endif
+
+###############################################################################
+# Optimization level
+OPT_LEVEL ?= 0
+# 0 -- OPT_DEBUG (pure c code); 1 -- OPT_ARM11; 2 -- OPT_NEON; 3 -- OPT_ARM9
+
+OPT_DEBUG  = 0
+OPT_ARM11  = 0
+OPT_NEON   = 0
+
+ifeq ($(OPT_LEVEL),0)
+    OPT_DEBUG = 1
+else
+  ifeq ($(OPT_LEVEL),1)
+     OPT_ARM11 = 1
+  else
+    ifeq ($(OPT_LEVEL),2)
+      OPT_NEON = 1
+    endif
+  endif
+endif
+
+
+ifeq ($(OPT_DEBUG),0)
+  ifeq ($(OPT_ARM11),1)
+    USE_ARM11_ASM = 1
+  else
+    USE_ARM11_ASM = 0
+  endif
+  ifeq ($(OPT_NEON),1)
+    USE_NEON_ASM = 1
+  else
+    USE_NEON_ASM = 0
+  endif
+else
+    CDEFS += -DOPT_DEBUG
+    USE_ARM11_ASM = 0
+    USE_NEON_ASM = 0
+endif
+
+ifeq ($(USE_ARM11_ASM),1)
+    CDEFS += -DOPT_ARM11
+    ifeq ($(TOOL_CHAIN),RVDS)
+      AFLAGS += --pd "OPT_ARM11 SETL {TRUE}"
+    else
+      AFLAGS += --defsym OPT_ARM11=1
+    endif
+else
+    ifeq ($(TOOL_CHAIN),RVDS)
+      AFLAGS += --pd "OPT_ARM11 SETL {FALSE}"
+    else
+      AFLAGS += --defsym OPT_ARM11=0
+    endif
+endif
+ifeq ($(USE_NEON_ASM),1)
+    CDEFS += -DOPT_NEON
+    ifeq ($(TOOL_CHAIN),RVDS)
+      AFLAGS += --pd "OPT_NEON SETL {TRUE}"
+    else
+      AFLAGS += --defsym OPT_NEON=1
+    endif
+else
+    ifeq ($(TOOL_CHAIN),RVDS)
+      AFLAGS += --pd "OPT_NEON SETL {FALSE}"
+    else
+      AFLAGS += --defsym OPT_NEON=0
+    endif
+endif
+
+
+ifeq ($(RELEASE),1)
+    CDEFS += -D_RELEASE
+else
+    CDEFS += -D_DEBUG
+endif
+
+# Program defined macros
+ifeq ($(TGT_OS),LERVDS)
+  CDEFS += -DARMULATOR
+endif
+
+ifeq ($(TGT_OS),BERVDS)
+  CDEFS += -DARMULATOR
+endif
+
+# hardware deblock: only allowed for arm11 (elinux or wince)
+ifeq ($(TGT_CPU),ARM11)
+  ifeq ($(TGT_OS),ELINUX)
+      CDEFS += -DHW_DEBLOCK -DDR_LINUX_TEST
+  endif
+  ifeq ($(TGT_OS),WINCE)
+      CDEFS += -DHW_DEBLOCK #-DDR_WINCE_TEST # cannot do direct render test
+  endif
+endif
+
+ifeq ($(BIN_TYPE),DLL)
+  CDEFS += -DEXPORT_DLL
+endif
+
+###############################################################################
+# Objects
+# Put the C files here
+
+# Override c source path
+CSRCS_DIR = src
+
+C_OBJS	= $(CSRCS_DIR)/io.o \
+          $(CSRCS_DIR)/h264_dec_dut.o
+
+
+# Put the asm files here
+
+# Put additional files here
+# This wrapper includes codec library
+#LIB_CODEC=../../../src/H264_dec/lib_H264_dec_arm11_elinux.so
+LFLAGS+=-L../../../src/H264_dec/ -l_H264_dec_arm11_elinux
+ifneq ($(OPT_LEVEL),0)
+    LIB_OBJS   = $(C_OBJS) $(ASM_OBJS)
+else
+    LIB_OBJS   = $(C_OBJS)
+endif
+
+CFLAGS += $(CDEFS)
+
+###############################################################################
+# Targets
+
+.PHONY : help
+help:
+	@echo make [Options] all
+	@echo Options:
+	@echo "    BUILD={ARM11ELINUX,ARM11LERVDS,UNIX} Default to ARM11ELINUX"
+	@echo "    RVDS_VERSION={2_2,3_0,3_1} Default to 2_2 (2.2). This is used when RVDS is selected for building"
+	@echo "    TIME_PROFILE_ENABLE={0,1} Whether time profiling enabled. Default to 1"
+	@echo "    RELEASE={0,1} 0 - Debug version; 1 - Release version. Default to 1"
+	@echo "    OPT_LEVEL={0,1,2} 0 - c; 1 - Arm11 asm; 2 - Neon asm. Default to 0"
+	@echo "    BIN_TYPE={DLL,LIB,EXE} Default to LIB. Here EXE is forbidden"
+	@echo  
+
+.PHONY : all
+all:  $(LIB_OBJS) $(LIB_CODEC)
+	@echo BUILD=$(BUILD) OPT_LEVEL=$(OPT_LEVEL) OPT_DEBUG=$(OPT_DEBUG) OPT_ARM11=$(OPT_ARM11) OPT_NEON=$(OPT_NEON)
+  ifeq ($(BIN_TYPE),LIB)
+	$(AR) $(LIB_ARGS) $(WRAPPER_NAME).a $(LIB_OBJS) $(LIB_CODEC)
+  endif
+  ifeq ($(BIN_TYPE),DLL)
+	@echo "dummy" > $(WRAPPER_NAME).so
+# Put $(LIB_CODEC) before system libraries (otherwise, DVTK will fail to link with $(LIB_CODEC) and report "`__aeabi_memclr' isn't defined" like errors
+#	$(LD) --static --shared -o $(WRAPPER_NAME).so $(LIB_CODEC) $(LIB_OBJS) $(LFLAGS)
+	$(LD) --shared --fpic --soname $(WRAPPER_NAME).so -o $(WRAPPER_NAME).so $(LIB_OBJS) $(LIB_CODEC) $(LFLAGS)
+#  --fpic is better than --fPIC but some platforms do not support. Both are for gcc, not LD
+
+# check TOOLCHAIN bug!
+    ifeq ($(TOOL_CHAIN),DVTK)
+	@echo "Fixup DVTK bug ..."
+	-$(ROOT_DIR)/utils/DVTK_bug_fixing/RelocTypeFix/RelocTypeFix $(WRAPPER_NAME).so
+    endif
+  endif
+	@echo "--- Build-all done for library $(CODEC) ---"
+
+
+.PHONY : clean
+clean:
+	-rm -f $(LIB_OBJS) $(LIBRARY).a $(LIBRARY).so
+
+ifeq ($(BUILD),ARM11ELINUXNORVDS)
+PRE_COMPILE_C_CMD = #splint -noeffect -likelybool +ptrnegate -boolops -predboolint -aliasunique +matchanyintegral -exportlocal -shiftimplementation $(CDEFS) $(INCLUDES) $<
+else
+PRE_COMPILE_C_CMD =
+endif
+POST_COMPILE_C_CMD =
+
+PRE_COMPILE_CPP_CMD =
+POST_COMPILE_CPP_CMD =
+
+PRE_COMPILE_AS_CMD =
+POST_COMPILE_AS_CMD =
+

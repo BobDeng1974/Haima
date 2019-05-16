@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Ebene_1"
+   x="0px"
+   y="0px"
+   width="120px"
+   height="340px"
+   viewBox="0 0 120 340"
+   enable-background="new 0 0 120 340"
+   xml:space="preserve"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="temperature_background.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"><metadata
+   id="metadata752"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs750"><inkscape:perspective
+   sodipodi:type="inkscape:persp3d"
+   inkscape:vp_x="0 : 170 : 1"
+   inkscape:vp_y="0 : 1000 : 0"
+   inkscape:vp_z="120 : 170 : 1"
+   inkscape:persp3d-origin="60 : 113.33333 : 1"
+   id="perspective754" />
+	
+		<linearGradient
+   gradientTransform="matrix(1,0,0,-1,-237.5996,90.04)"
+   y2="-79.3906"
+   x2="347.5996"
+   y1="-79.3906"
+   x1="267.5996"
+   gradientUnits="userSpaceOnUse"
+   id="SVGID_1_">
+		<stop
+   id="stop5"
+   style="stop-color:#000000"
+   offset="0" />
+		<stop
+   id="stop7"
+   style="stop-color:#3A3A3A"
+   offset="0.2053" />
+		<stop
+   id="stop9"
+   style="stop-color:#858585"
+   offset="0.4912" />
+		<stop
+   id="stop11"
+   style="stop-color:#BCBCBC"
+   offset="0.7284" />
+		<stop
+   id="stop13"
+   style="stop-color:#DEDEDE"
+   offset="0.9045" />
+		<stop
+   id="stop15"
+   style="stop-color:#EBEBEB"
+   offset="1" />
+	</linearGradient>
+	
+	
+	
+	
+	
+	
+<linearGradient
+   inkscape:collect="always"
+   xlink:href="#SVGID_1_"
+   id="linearGradient4229"
+   gradientUnits="userSpaceOnUse"
+   gradientTransform="matrix(1,0,0,-1,-237.5996,90.04)"
+   x1="267.5996"
+   y1="-79.3906"
+   x2="347.5996"
+   y2="-79.3906" />
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			
+		
+				
+				
+			
+			
+		
+				
+				
+			
+			
+		
+				
+				
+			
+			
+		
+				
+				
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</defs><sodipodi:namedview
+   inkscape:window-height="1027"
+   inkscape:window-width="1071"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0.0"
+   guidetolerance="10.0"
+   gridtolerance="10.0"
+   objecttolerance="10.0"
+   borderopacity="1.0"
+   bordercolor="#666666"
+   pagecolor="#ffffff"
+   id="base"
+   showgrid="true"
+   showguides="true"
+   inkscape:guide-bbox="true"
+   inkscape:zoom="3.3411764"
+   inkscape:cx="97.797662"
+   inkscape:cy="196.10481"
+   inkscape:window-x="329"
+   inkscape:window-y="35"
+   inkscape:current-layer="layer1"><sodipodi:guide
+     orientation="1,0"
+     position="48.040935,125.34028"
+     id="guide4595" /><inkscape:grid
+     type="xygrid"
+     id="grid4597" /></sodipodi:namedview>
+<g
+   inkscape:groupmode="layer"
+   id="layer1"
+   inkscape:label="hgu">
+
+
+</g><path
+   style="fill:url(#linearGradient4229)"
+   id="path17"
+   d="M 90,264.225 L 90,20 C 90,9 81,0 70,0 C 59,0 50,9 50,20 L 50,264.225 C 38.047,271.143 30,284.057 30,298.862 C 30,320.954 47.908,338.862 70,338.862 C 92.091,338.862 110,320.954 110,298.862 C 110,284.059 101.952,271.143 90,264.225 z" />
+
+
+
+
+
+</svg>

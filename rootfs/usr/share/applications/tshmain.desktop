@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=TSHMain
+Name[zh_CN]=全景泊车
+GenericName=Surroundview
+GenericName[zh_CN]=全景泊车
+Comment=360 Surroundview
+Comment[zh_CN]=360全景泊车
+Exec=/home/tsh/bin/tshmain
+Terminal=false
+Icon=/home/tsh/res/tshmain.png
+Type=Application

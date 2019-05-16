@@ -1,0 +1,517 @@
+
+#*****************************************************************************
+#OPTIONS
+#*****************************************************************************
+# TGT_OS = [UNIX, ELINUX, VRTX, SYMBIAN, WINCE]
+# TGT_ENDIAN = [LITTLE, BIG]
+# TGT_CPU = [ARM9, ARM11, X86, SC140]
+# HOST_OS = [WIN32, LINUX]
+# TOOL_CHAIN = [RVDS, GNU, DVTK, WINCE500]
+# LINK_TC = [DVTK]
+#*****************************************************************************
+#OPTIONS
+#*****************************************************************************
+
+
+
+#*****************************************************************************
+#
+# Codec specific common test app Makefile
+#
+#*****************************************************************************
+ifeq ($(BUILD),UNIX)
+    TGT_OS=UNIX
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=X86
+    HOST_OS=LINUX
+
+endif
+ifeq ($(BUILD),ARM9ELINUX)
+    TGT_OS=ELINUX
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM9
+    HOST_OS=LINUX
+    TOOL_CHAIN=DVTK
+ ifndef LIB_TYPE
+    LIB_TYPE =DYNAMIC
+ endif
+endif
+ifeq ($(BUILD),ARM9DTELINUX)
+    TGT_OS=ELINUX
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM9
+    HOST_OS=LINUX
+    TOOL_CHAIN=DVTK
+endif
+
+ifeq ($(BUILD),ARM11DTELINUX)
+    TGT_OS=ELINUX
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM11
+    HOST_OS=LINUX
+    TOOL_CHAIN=DVTK
+endif
+
+ifeq ($(BUILD),ARM11ELINUX)
+    TGT_OS=ELINUX
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM11
+    HOST_OS=LINUX
+    TOOL_CHAIN=DVTK
+ ifndef LIB_TYPE
+    LIB_TYPE =DYNAMIC
+ endif
+endif
+
+ifeq ($(BUILD),ARM12ELINUX)
+    TGT_OS=ELINUX
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM12
+    HOST_OS=LINUX
+    TOOL_CHAIN=DVTK
+ ifndef LIB_TYPE
+    LIB_TYPE =DYNAMIC
+ endif
+endif
+
+
+ifeq ($(BUILD),ARM11GSELINUX)
+    TGT_OS=ELINUX
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM11
+    HOST_OS=LINUX
+    TOOL_CHAIN=GSO
+ ifndef LIB_TYPE
+    LIB_TYPE =DYNAMIC
+ endif
+endif
+
+
+ifeq ($(BUILD),ARM11BERVDS)
+    TGT_OS=BERVDS
+    TGT_ENDIAN=BIG
+    TGT_CPU=ARM11
+    HOST_OS=WIN32
+    TOOL_CHAIN=RVDS
+endif
+
+ifeq ($(BUILD),I300VRTX)
+    TGT_OS=VRTX
+    TGT_ENDIAN=BIG
+    TGT_CPU=ARM11
+    HOST_OS=WIN32
+    TOOL_CHAIN=RVDS
+endif
+
+ifeq ($(BUILD),ARM11LERVDS)
+    TGT_OS=LERVDS
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM11
+    HOST_OS=WIN32
+    TOOL_CHAIN=RVDS
+endif
+
+ifeq ($(BUILD),ARM12LERVDS)
+    TGT_OS=LERVDS
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM12
+    HOST_OS=WIN32
+    TOOL_CHAIN=RVDS
+endif
+
+
+ifeq ($(BUILD),ARM9LERVDS)
+    TGT_OS=LERVDS
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM9
+    HOST_OS=WIN32
+    TOOL_CHAIN=RVDS
+endif
+
+ifeq ($(BUILD),ARM9BERVDS)
+    TGT_OS=BERVDS
+    TGT_ENDIAN=BIG
+    TGT_CPU=ARM9
+    HOST_OS=WIN32
+    TOOL_CHAIN=RVDS
+endif
+
+ifeq ($(BUILD),ARM11WINCE5)
+    TGT_OS=WINCE
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM11
+#    HOST_OS=LINUX
+    TOOL_CHAIN=WINCE500
+endif
+
+ifeq ($(BUILD),ARM9ELINUXFHW)
+    TGT_OS=ELINUX
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM9
+    HOST_OS=LINUX
+    TOOL_CHAIN=DVTK
+	FLOAT=HW
+ ifndef LIB_TYPE
+    LIB_TYPE =DYNAMIC
+ endif
+endif
+
+ifeq ($(BUILD),ARM11ELINUXFHW)
+    TGT_OS=ELINUX
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM11
+    HOST_OS=LINUX
+    TOOL_CHAIN=DVTK
+	FLOAT=HW
+ ifndef LIB_TYPE
+    LIB_TYPE =DYNAMIC
+ endif
+endif
+
+ifeq ($(BUILD),ARM12ELINUXFHW)
+    TGT_OS=ELINUX
+    TGT_ENDIAN=LITTLE
+    TGT_CPU=ARM12
+    HOST_OS=LINUX
+    TOOL_CHAIN=DVTK
+	FLOAT=HW
+ ifndef LIB_TYPE
+    LIB_TYPE =DYNAMIC
+ endif
+endif
+
+#*****************************************************************************
+#Library Name Defines
+#*****************************************************************************
+ifeq ($(TGT_OS),UNIX)
+	TGT_OS_BIN	= unix
+endif
+ifeq ($(TGT_OS),ELINUX)
+	TGT_OS_BIN	= elinux
+endif
+ifeq ($(TGT_OS),WINCE)
+	TGT_OS_BIN	= wince
+endif
+ifeq ($(TGT_OS),SYMBIAN)
+	TGT_OS_BIN	= symbian
+endif
+ifeq ($(TGT_OS),VRTX)
+	TGT_OS_BIN	= vrtx
+endif
+ifeq ($(TGT_OS),LERVDS)
+	TGT_OS_BIN	= lervds
+endif
+ifeq ($(TGT_OS),BERVDS)
+	TGT_OS_BIN	= bervds
+endif
+
+
+
+ifeq ($(TGT_CPU),ARM12)
+	TGT_CPU_BIN	= arm12
+endif
+
+ifeq ($(TGT_CPU),ARM11)
+	TGT_CPU_BIN	= arm11
+endif
+ifeq ($(TGT_CPU),ARM9)
+	TGT_CPU_BIN	= arm9
+endif
+ifeq ($(TGT_CPU),X86)
+	TGT_CPU_BIN	= x86
+endif
+ifeq ($(TGT_CPU),SC140)
+	TGT_CPU_BIN	= sc140
+endif
+#*****************************************************************************
+#Library Name Defines DONE!!!
+#*****************************************************************************
+
+
+#*****************************************************************************
+#Set the Tool chain and flags specific to it.
+#*****************************************************************************
+# Tool chain
+
+###### UNIX Build ######
+ifeq ($(TGT_OS),UNIX)
+    CC = gcc
+    LN = gcc
+
+    CFLAGS = -Wall
+    LFLAGS = -lm -lc -lrt
+
+    ifeq ($(DBG_BUILD), 1)
+        CFLAGS   += -g
+    endif
+
+endif
+
+###### GNU Toolchain ######
+ifeq ($(TOOL_CHAIN),GNU)
+    TOOLS_DIR   = /usr/local/arm/arm-linux/bin
+    CC          = $(TOOLS_DIR)/gcc
+    LN          = $(TOOLS_DIR)/gcc
+    CFLAGS_ENDIAN_LITTLE    = -mlittle-endian
+    CFLAGS_ENDIAN_BIG       = -mbig-endian
+    AFLAGS_ENDIAN_LITTLE    = -EL
+    AFLAGS_ENDIAN_BIG       = -EB
+
+    ifeq ($(TGT_CPU),ARM9)
+        CFLAGS_CPU          = -mcpu=arm9
+    endif
+    AFLAGS_CPU  = $(CFLAGS_CPU)
+
+    CFLAGS  = -O3  -Wall
+    LFLAGS  =  -lm -lc -lrt
+
+    ifeq ($(DBG_BUILD), 1)
+        CFLAGS   += -g
+    endif
+
+endif
+
+###### RVDS Toolchain ######
+ifeq ($(TOOL_CHAIN),RVDS)
+    ifeq ($(HOST_OS),LINUX)
+        TOOLS_DIR   = /vobs/multimedia_tools/arm/RVCT/Programs/2.2/503/linux-pentium/
+    endif
+    CC  = $(TOOLS_DIR)armcc
+    LN  = $(TOOLS_DIR)armlink
+    AS  = $(TOOLS_DIR)armasm
+
+
+    ifeq ($(TGT_CPU),ARM12)
+        CFLAGS_CPU  = --cpu Cortex-A8
+    endif
+
+    ifeq ($(TGT_CPU),ARM11)
+        CFLAGS_CPU  = --cpu ARM1136J-S
+    endif
+    ifeq ($(TGT_CPU),ARM9)
+        CFLAGS_CPU  = --cpu ARM926EJ-S
+    endif
+    AFLAGS_CPU      = $(CFLAGS_CPU)
+
+    # Endian Flags
+    CFLAGS_ENDIAN_LITTLE   = --littleend
+    CFLAGS_ENDIAN_BIG      = --bigend
+    AFLAGS_ENDIAN_LITTLE   = $(CFLAGS_ENDIAN_LITTLE)
+    AFLAGS_ENDIAN_BIG      = $(CFLAGS_ENDIAN_BIG)
+
+    # Optimization Flags
+    ifndef OPTIM_LEVEL
+        OPTIM_LEVEL         = -O3                       # -O1 or -O2 or -O3 : Optimization Level
+    endif
+    CFLAGS_OPTIM        = $(OPTIM_LEVEL) -Otime
+
+    ifeq ($(TGT_CPU),ARM12)
+        CFLAGS = -g --dwarf2 --fpu SoftVFP $(CFLAGS_OPTIM)
+        AFLAGS =--littleend --debug --keep --apcs=inter # --fpu SoftVFP --diag_warning 1563
+        LFLAGS =--scatter ../../common/sort.scat   --info totals --info unused --map --list ./test.map
+    else
+    CFLAGS = --dwarf2 $(CFLAGS_OPTIM)
+    AFLAGS =
+    LFLAGS =
+    endif
+
+    ifeq ($(DBG_BUILD), 1)
+        AFLAGS   += --debug
+        CFLAGS   += --debug #-g
+    else
+        CFLAGS   += --no_debug
+    endif
+
+endif
+
+###### GSO Toollchain ######
+ifeq ($(TOOL_CHAIN),GSO)
+    ifeq ($(TGT_CPU),ARM11)
+        TOOLS_DIR   = /vobs/multimedia_tools/gso/opt/freescale/usr/local/gcc-4.1.2-glibc-2.5-nptl-3/arm-none-linux-gnueabi
+        CC          = $(TOOLS_DIR)/bin/arm-none-linux-gnueabi-gcc-4.1.2
+        LN          = $(TOOLS_DIR)/bin/arm-none-linux-gnueabi-gcc-4.1.2
+
+        TC_LIBRARY  = $(TOOLS_DIR)/arm-none-linux-gnueabi/sysroot/usr/lib/libc.a
+        TC_LIBRARY += $(TOOLS_DIR)/arm-none-linux-gnueabi/sysroot/usr/lib/libm.a
+        TC_LIBRARY += $(TOOLS_DIR)/arm-none-linux-gnueabi/sysroot/usr/lib/librt.a
+    endif
+
+	ifeq ($(TGT_CPU),ARM9)
+	    TOOLS_DIR   = /vobs/multimedia_tools/gso/opt/freescale/usr/local/gcc-4.1.2-glibc-2.5-nptl-3/arm-none-linux-gnueabi
+	    CC          = $(TOOLS_DIR)/bin/arm-none-linux-gnueabi-gcc-4.1.2
+	    LN          = $(TOOLS_DIR)/bin/arm-none-linux-gnueabi-gcc-4.1.2
+	    #LFLAGS      = -L$(TOOLS_DIR)/lib/gcc/arm-v5te_softfloat-linux-gnueabi/4.1.2
+	    #LFLAGS      += -B$(TOOLS_DIR)/arm-v5te_softfloat-linux-gnueabi/lib
+	    GSO_LIBS	= $(TOOLS_DIR)/arm-none-linux-gnueabi/sysroot/usr/lib/libm.a
+	    GSO_LIBS	+= $(TOOLS_DIR)/arm-none-linux-gnueabi/sysroot/usr/lib/libc.a
+	    GSO_LIBS	+= $(TOOLS_DIR)/arm-none-linux-gnueabi/sysroot/usr/lib/librt.a
+	endif
+
+
+    ifeq ($(TGT_CPU),ARM11)
+        CFLAGS_CPU    = -mcpu=arm1136j-s
+    endif
+    ifeq ($(TGT_CPU),ARM9)
+        CFLAGS_CPU    = -mcpu=arm926ej-s
+    endif
+    AFLAGS_CPU      = $(CFLAGS_CPU)
+    LFLAGS_CPU      = $(CFLAGS_CPU)
+
+    CFLAGS      =
+    ifeq ($(DBG_BUILD), 1)
+        CFLAGS   += -g
+    endif
+    LFLAGS      = -L$(TOOLS_DIR)/lib/gcc/arm-none-linux-gnueabi/4.1.1
+    LFLAGS     += -lm -lc -lrt
+endif
+
+
+###### DevTek Toolchain ######
+ifeq ($(TOOL_CHAIN),DVTK)
+    #For ARM9 Platform
+    #TOOLS_DIR   = /opt/freescale/usr/local/gcc-4.1.1-glibc-2.4-nptl-6/arm-none-linux-gnueabi
+    #For ARM9 Platform
+		#TOOLS_DIR   = /opt/freescale/usr/local/gcc-4.1.1-glibc-2.4-nptl-3/arm-none-linux-gnueabi
+    ifneq ($(FLOAT),HW)
+    TOOLS_DIR   = /vobs/fsl_mad_multimedia_tools/devtek/gcc-4.1.1-glibc-2.4-nptl-6/arm-none-linux-gnueabi
+
+    CC          = $(TOOLS_DIR)/bin/arm-none-linux-gnueabi-gcc
+    LN          = $(TOOLS_DIR)/bin/arm-none-linux-gnueabi-gcc
+
+    TC_LIBRARY  = $(TOOLS_DIR)/arm-none-linux-gnueabi/lib/libc.a
+    TC_LIBRARY += $(TOOLS_DIR)/arm-none-linux-gnueabi/lib/libm.a
+    TC_LIBRARY += $(TOOLS_DIR)/arm-none-linux-gnueabi/lib/librt.a
+    else
+    TOOLS_DIR 			= /usr/armv7-poky-gnueabi-4.7.2-tool-chain/i686-linux/usr/bin/armv7ahf-vfp-neon-poky-linux-gnueabi
+	TC_ROOT_DIR	                = /usr/armv7-poky-gnueabi-4.7.2-tool-chain/imx6qsabresd/usr
+    LN                              = $(TOOLS_DIR)/arm-poky-linux-gnueabi-gcc
+	CC                              = $(TOOLS_DIR)/arm-poky-linux-gnueabi-gcc
+	SYS_INCLUDE                     = $(TC_ROOT_DIR)/include
+#	 TOOLS_DIR 			= /usr/bin/
+#	 TC_ROOT_DIR	                = /usr/arm-linux-gnueabi/lib
+#    LN                              = $(TOOLS_DIR)/arm-linux-gnueabi-gcc
+#    CC                              = $(TOOLS_DIR)/arm-linux-gnueabi-gcc
+	TC_LIBRARY       = $(TC_ROOT_DIR)/lib/libc.a
+	TC_LIBRARY       += $(TC_ROOT_DIR)/lib/libm.a
+	TC_LIBRARY       += $(TC_ROOT_DIR)/lib/librt.a
+    endif
+
+    CFLAGS_ENDIAN_LITTLE    = -mlittle-endian
+    CFLAGS_ENDIAN_BIG       = -mbig-endian
+
+    ifeq ($(TGT_CPU),ARM9)
+		    AFLAGS_ENDIAN_LITTLE    = $(CFLAGS_ENDIAN_LITTLE)
+		    AFLAGS_ENDIAN_BIG       = $(CFLAGS_ENDIAN_BIG)
+
+        CFLAGS_CPU    = -mcpu=arm926ej-s
+    endif
+
+    ifeq ($(TGT_CPU),ARM11)
+		 	  #AFLAGS_ENDIAN_LITTLE    = -EL
+		    #AFLAGS_ENDIAN_BIG       = -BL
+
+        CFLAGS_CPU  = -mcpu=arm1136j-s
+        LFLAGS      = -L$(TOOLS_DIR)/lib/gcc/arm-none-linux-gnueabi/4.1.1
+    endif
+	
+	ifeq ($(FLOAT),HW)        
+		CFLAGS          = -ftree-vectorize -ffast-math -fsingle-precision-constant -mfloat-abi=hard -O0 -I$(SYS_INCLUDE)
+		LFLAGS         += -lm -lc -lrt -ftree-vectorize -ffast-math -fsingle-precision-constant -mfloat-abi=hard
+		LFLAGS         += --sysroot=/usr/armv7-poky-gnueabi-4.7.2-tool-chain/imx6qsabresd
+	else
+		CFLAGS          = 
+		LFLAGS         += -lm -lc -lrt
+	endif
+
+		AFLAGS_CPU      = $(CFLAGS_CPU)
+		LFLAGS_CPU      = $(CFLAGS_CPU)
+
+    ifeq ($(DBG_BUILD), 1)
+        CFLAGS   += -g -DDEBUG
+    endif
+
+endif
+
+###### WinCE5.0 Toolchain ######
+ifeq ($(TOOL_CHAIN),WINCE500)
+  	WINCE_SDK_DIR = C:/WINCE500/SDK/BIN/I386
+  	WINCE_ROOT= C:/WINCE500
+
+	# Compilation Tools
+	CC = $(WINCE_SDK_DIR)/ARM/cl.exe
+	AS = $(WINCE_SDK_DIR)/ARM/armasm.exe
+	LN = $(WINCE_SDK_DIR)/link
+	#AR = $(WINCE_SDK_DIR)/armar
+	OBJDUMP=$(WINCE_SDK_DIR)/dumpbin.exe
+
+    AFLAGS_ENDIAN_LITTLE    = -li
+    AFLAGS_ENDIAN_BIG       = -bi
+
+	CFLAGS = -DWINCE -DARCH_GENERIC -DUNICODE -D_UNICODE -DUNDER_CE=500 -D_WIN32_WCE=500 -DSTRICT -DARM -D_ARM_ \
+	  -D__WINCE /Gy /GF /QRarch5 /O2 /Ox /Ot /FA /Zi
+
+	AFLAGS =  -coff  -cr -i arm
+
+	ifeq ($(TGT_CPU),ARM11)
+        AFLAGS_CPU  = -CPU ARM1136
+    endif
+    ifeq ($(TGT_CPU),ARM9)
+        AFLAGS_CPU  = -CPU ARM926
+    endif
+
+endif
+
+#*****************************************************************************
+#Set the Tool chain and flags specific to it DONE!!!
+#*****************************************************************************
+
+#Define the include path
+INCLUDES    = -I../../ghdr -I../../common/hdr -I./hdr
+
+#*****************************************************************************
+#Set the Common Defines.
+#*****************************************************************************
+CFLAGS += $(CFLAGS_CPU) $(CFLAGS_ENDIAN_$(TGT_ENDIAN)) \
+                   -DTGT_CPU_$(TGT_CPU) -DTGT_ENDIAN_$(TGT_ENDIAN) -DTGT_OS_$(TGT_OS)
+AFLAGS += $(AFLAGS_CPU) $(AFLAGS_ENDIAN_$(TGT_ENDIAN))
+LFLAGS += $(LFLAGS_CPU)
+
+PROJ_DIR = ..
+APP_DIR = ./c_src
+ifdef DBG
+LIB_DIR = ../../src/$(CODEC)
+else
+LIB_DIR = ../../release/lib
+endif
+
+ifeq ($(FLOAT),HW)
+PROGRAM = test_$(CODEC)_$(TGT_CPU_BIN)_$(TGT_OS_BIN)_fhw
+PROGRAM_DEC = test_$(CODEC)_dec_$(TGT_CPU_BIN)_$(TGT_OS_BIN)_fhw
+PROGRAM_ENC = test_$(CODEC)_enc_$(TGT_CPU_BIN)_$(TGT_OS_BIN)_fhw
+else
+PROGRAM = test_$(CODEC)_$(TGT_CPU_BIN)_$(TGT_OS_BIN)
+PROGRAM_DEC = test_$(CODEC)_dec_$(TGT_CPU_BIN)_$(TGT_OS_BIN)
+PROGRAM_ENC = test_$(CODEC)_enc_$(TGT_CPU_BIN)_$(TGT_OS_BIN)
+endif
+ifeq ($(TGT_OS),BERVDS)
+LIBRARY = $(LIB_DIR)/lib_$(CODEC)_$(TGT_CPU_BIN)_bervds.a $(TC_LIBRARY)
+LIBRARY_DEC = $(LIB_DIR)/lib_$(CODEC)_dec_$(TGT_CPU_BIN)_bervds.a $(TC_LIBRARY)
+LIBRARY_ENC = $(LIB_DIR)/lib_$(CODEC)_enc_$(TGT_CPU_BIN)_bervds.a $(TC_LIBRARY)
+else
+LIBRARY = $(LIB_DIR)/lib_$(CODEC)_$(TGT_CPU_BIN)_$(TGT_OS_BIN).a $(TC_LIBRARY)
+LIBRARY_DEC = $(LIB_DIR)/lib_$(CODEC)_dec_$(TGT_CPU_BIN)_$(TGT_OS_BIN).a $(TC_LIBRARY)
+LIBRARY_ENC = $(LIB_DIR)/lib_$(CODEC)_enc_$(TGT_CPU_BIN)_$(TGT_OS_BIN).a $(TC_LIBRARY)
+endif
+ifeq ($(LIB_TYPE),DYNAMIC)
+    LIBRARY = $(LIB_DIR)/lib_$(CODEC)_$(TGT_CPU_BIN)_$(TGT_OS_BIN).so $(TC_LIBRARY)
+    LIBRARY_DEC = $(LIB_DIR)/lib_$(CODEC)_dec_$(TGT_CPU_BIN)_$(TGT_OS_BIN).so $(TC_LIBRARY)
+    LIBRARY_ENC = $(LIB_DIR)/lib_$(CODEC)_enc_$(TGT_CPU_BIN)_$(TGT_OS_BIN).so $(TC_LIBRARY)
+endif
+ifeq ($(LIB_TYPE),STATIC)
+    LIBRARY = $(LIB_DIR)/lib_$(CODEC)_$(TGT_CPU_BIN)_$(TGT_OS_BIN).a $(TC_LIBRARY)
+    LIBRARY_DEC = $(LIB_DIR)/lib_$(CODEC)_dec_$(TGT_CPU_BIN)_$(TGT_OS_BIN).a $(TC_LIBRARY)
+    LIBRARY_ENC = $(LIB_DIR)/lib_$(CODEC)_enc_$(TGT_CPU_BIN)_$(TGT_OS_BIN).a $(TC_LIBRARY)
+endif
+
+
+

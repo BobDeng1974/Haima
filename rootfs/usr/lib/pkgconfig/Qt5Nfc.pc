@@ -1,0 +1,14 @@
+prefix=/home/bamboo/build/3.14.52-1.1.0/fsl-imx-fb/temp_build_dir/build_fsl-imx-fb/tmp/sysroots/imx6qdlsolo/usr
+exec_prefix=${prefix}
+libdir=/usr/lib
+includedir=/usr/include/qt5
+
+
+Name: Qt5 Nfc
+Description: Qt Nfc module
+Version: 5.5.1
+Libs: -L${libdir} -lQt5Nfc 
+Libs.private: -lQt5DBus -lQt5Core -lpthread   
+Cflags: -I${includedir}/QtNfc -I${includedir}
+Requires: Qt5Core
+

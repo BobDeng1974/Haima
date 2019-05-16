@@ -1,0 +1,11 @@
+#!/bin/sh
+
+prefix=/usr
+datarootdir=${prefix}/share
+datadir=/usr/share
+codegendir=${datadir}/pygobject/2.0/codegen
+
+PYTHONPATH=$codegendir
+export PYTHONPATH
+
+exec /home/bamboo/build/3.14.52-1.1.0/fsl-imx-fb/temp_build_dir/build_fsl-imx-fb/tmp/sysroots/x86_64-linux/usr/bin/python-native/python $codegendir/codegen.py "$@"

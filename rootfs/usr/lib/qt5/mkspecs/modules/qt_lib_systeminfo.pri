@@ -1,0 +1,17 @@
+QT.systeminfo.VERSION = 5.4.0
+QT.systeminfo.MAJOR_VERSION = 5
+QT.systeminfo.MINOR_VERSION = 4
+QT.systeminfo.PATCH_VERSION = 0
+QT.systeminfo.name = QtSystemInfo
+QT.systeminfo.libs = $$QT_MODULE_LIB_BASE
+QT.systeminfo.rpath = /usr/lib
+QT.systeminfo.includes = $$QT_MODULE_INCLUDE_BASE $$QT_MODULE_INCLUDE_BASE/QtSystemInfo
+QT.systeminfo.bins = $$QT_MODULE_BIN_BASE
+QT.systeminfo.libexecs = $$QT_MODULE_LIBEXEC_BASE
+QT.systeminfo.plugins = $$QT_MODULE_PLUGIN_BASE
+QT.systeminfo.imports = $$QT_MODULE_IMPORT_BASE
+QT.systeminfo.qml = $$QT_MODULE_QML_BASE
+QT.systeminfo.depends = core network dbus
+QT.systeminfo.module_config =
+QT.systeminfo.DEFINES = QT_SYSTEMINFO_LIB
+QT_MODULES += systeminfo

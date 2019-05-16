@@ -1,0 +1,6 @@
+QMAKE_PRL_BUILD_DIR = /home/bamboo/build/3.14.52-1.1.0/fsl-imx-fb/temp_build_dir/build_fsl-imx-fb/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/qtdeclarative/5.5.0+gitAUTOINC+9794e7d66c-r0/build/src/quickwidgets
+QMAKE_PRO_INPUT = quickwidgets.pro
+QMAKE_PRL_TARGET = libQt5QuickWidgets.so.5.5.1
+QMAKE_PRL_CONFIG = silent lex yacc depend_includepath testcase_targets import_plugins import_qpa_plugin qt warn_on release link_prl incremental cross_compile shared qpa no_mocdepend release qt_no_framework linux unix posix \$(OE_QMAKE_COMPILER) gcc cross_compile compile_examples qpa largefile neon pcre prefix_build force_independent force_bootstrap create_prl link_prl prepare_docs qt_docs_targets no_private_qt_headers_warning QTDIR_build exceptions_off testcase_exceptions qt_example_installs warning_clean OE_QTXMLPATTERNS_ENABLED git_build qmake_cache target_qt need_fwd_pri qt_install_module c++11 hide_symbols qt_install_headers create_cmake compiler_supports_fpmath create_pc create_libtool explicitlib have_target dll thread uic opengl moc resources
+QMAKE_PRL_VERSION = 5.5.1
+QMAKE_PRL_LIBS =  -lQt5Quick -lQt5Qml -lQt5Widgets -lQt5Gui -lQt5Network -lQt5Core -lpthread

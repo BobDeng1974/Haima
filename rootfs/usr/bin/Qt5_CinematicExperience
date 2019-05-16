@@ -1,0 +1,4 @@
+#!/bin/sh
+export QML_IMPORT_PATH=/usr/share/cinematicexperience-1.0
+export QML2_IMPORT_PATH=/usr/share/cinematicexperience-1.0
+/usr/share/cinematicexperience-1.0/Qt5_CinematicExperience $* 

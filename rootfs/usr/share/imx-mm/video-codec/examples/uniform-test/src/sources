@@ -1,0 +1,67 @@
+WINCEREL=1
+RELEASETYPE=CUSTOM
+_ISVINCPATH=$(_WINCEROOT)\public\common\sdk\inc;
+_OEMINCPATH=$(_WINCEROOT)\public\common\oak\inc;$(_WINCEROOT)\public\common\sdk\inc;
+TARGETNAME=test_dec_arm_wince
+TARGETPATH=..\..\bin\exe$(_WINCEOSVER)\$(_CPUINDPATH)
+FILE_VIEW_ROOT_FOLDER= \
+
+FILE_VIEW_RESOURCE_FOLDER= \
+
+FILE_VIEW_INCLUDES_FOLDER= \
+
+SOURCES= \
+  test_dec_arm_elinux.c \
+  render_lcd.c \
+
+ARM_SOURCES= \
+  ARM\wince_lib.s \
+
+TARGETTYPE=PROGRAM
+PRECOMPILED_CXX=1
+EXEENTRY=mainWCRTStartup
+PRECOMPILED_PCH=
+PRECOMPILED_OBJ=
+PRECOMPILED_INCLUDE=
+FILE_VIEW_PARAMETER_FOLDER= \
+  reentry_test.bib \
+  reentry_test.reg \
+  reentry_test.dat \
+  reentry_test.db \
+  ProjSysgen.bat \
+  src.bib \
+  src.reg \
+  src.dat \
+  src.db \
+
+INCLUDES= \
+  ..\hdr\; \
+  ..\..\dut_hdr\; \
+  $(_PROJECTROOT)\cesysgen\sdk\inc; \
+  $(_WINCEROOT)\public\common\oak\inc; \
+  $(_PROJECTROOT)\cesysgen\ddk\inc; \
+  $(_PROJECTROOT)\cesysgen\oak\inc; \
+
+ADEFINES=-coff  -cr -i arm -CPU ARM1136
+WARNLEVEL=3
+TARGET_PDB_NAME=.\obj\$(_CPUINDPATH)\test_dec_arm_wince.pdb
+OPTIMIZE_FAVOR=SPEED
+
+!IF ( "$(_WINCEOSVER)" == "500" )
+TARGETLIBS= \
+  $(_PROJECTROOT)\cesysgen\sdk\lib\$(_CPUINDPATH)\coredll.lib \
+  $(_PUBLICROOT)\common\oak\lib\$(_CPUINDPATH)\mxarm11_pfsdk.lib \
+  $(_PROJECTROOT)\cesysgen\oak\lib\$(_CPUINDPATH)\ceddk.lib \
+
+!ELSE
+TARGETLIBS= \
+  $(_PROJECTROOT)\cesysgen\sdk\lib\$(_CPUINDPATH)\coredll.lib \
+  $(_PROJECTROOT)\cesysgen\oak\lib\$(_CPUINDPATH)\ceddk.lib \
+
+!ENDIF
+
+!IF ( "$(_WINCEOSVER)" == "600" )
+CDEFINES=-DWINCE -DARCH_GENERIC -DUNICODE -D_UNICODE -DUNDER_CE=600 -D_WIN32_WCE=600 -DSTRICT -DARM -D_ARM_ -D__WINCE /Gy /GF /QRarch5 /O2 /Ox /Ot /FA /Zi
+!ELSE
+CDEFINES=-DWINCE -DARCH_GENERIC -DUNICODE -D_UNICODE -DUNDER_CE=500 -D_WIN32_WCE=500 -DSTRICT -DARM -D_ARM_ -D__WINCE /Gy /GF /QRarch5 /O2 /Ox /Ot /FA /Zi
+!ENDIF

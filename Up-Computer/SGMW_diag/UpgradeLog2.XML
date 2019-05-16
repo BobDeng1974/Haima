@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SGMW_diag">
+</Property><Property Name="Solution File" Value="D:\MyMork\CAN诊断升级\长丰升级工具-源码\长丰升级工具-源码\SGMW_diag\SGMW_diag.sln">
+</Property><Property Name="Date" Value="2018年5月17日">
+</Property><Property Name="Time" Value="11:58:33">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="2" Project="SGMW_diag" Source="SGMW_diag.vcproj" Description="The following error has occurred during XML parsing:&#xA;&#xA;File: D:\MyMork\CAN诊断升级\长丰升级工具-源码\长丰升级工具-源码\SGMW_diag\SGMW_diag.vcproj&#xA;Line: 5&#xA;Column: 21&#xA;Error Message:&#xA;无效指针&#xA;&#xA;The file 'D:\MyMork\CAN诊断升级\长丰升级工具-源码\长丰升级工具-源码\SGMW_diag\SGMW_diag.vcproj' has failed to load.">
+</Event><Event ErrorLevel="2" Project="SGMW_diag" Source="SGMW_diag.vcproj" Description="Project upgrade failed.">
+</Event><Event ErrorLevel="3" Project="SGMW_diag" Source="SGMW_diag.vcproj" Description="Not Converted">
+</Event></UpgradeLog>

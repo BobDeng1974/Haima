@@ -1,0 +1,6 @@
+# Alpha EV-67 Events
+#
+event:0x01 counters:0,1 um:zero minimum:500 name:CYCLES : Total cycles
+event:0x02 counters:0 um:zero minimum:500 name:INSTRUCTIONS : Retired instructions
+event:0x03 counters:1 um:zero minimum:500 name:BCACHE_MISS : Bcache misses/long probe latency
+event:0x04 counters:1 um:zero minimum:500 name:MBOX_REPLAY : Mbox replay traps

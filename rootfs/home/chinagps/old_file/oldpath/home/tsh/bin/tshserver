@@ -1,0 +1,58 @@
+#!/bin/sh
+
+
+LIBTVDECODER=/home/tsh/lib/libtvdecoder.so
+
+#SYSTEMTYPE=SDMIPI
+SYSTEMTYPE=HDMIPI
+
+#echo "===== TSH 360 System ====="
+export FB_MULTI_BUFFER=3
+export GPU_VIV_DISABLE_CLEAR_FB=1
+export QT_QPA_PLATFORM=eglfs
+export QT_QPA_EGLFS_FB=/dev/fb0
+export QT_QPA_EVDEV_KEYBOARD_PARAMETERS=repeat-delay\=100:repeat-rate\=333
+# export QT_QPA_EGLFS_DISABLE_INPUT=1
+# export VPU_LIB_DBG=10
+
+chmod 666 /dev/mxc*
+mkdir -p /dev/shm
+
+INITD=/etc/init.d
+
+FFS="alignment.sh alsa-state apmd avahi-daemon bootlogd bootmisc.sh \
+	banner.sh checkroot.sh hwclock.sh mountnfs.sh neard networking \
+	nfscommon nfsserver ofono oprofileui-server psplash.sh read-only-rootfs-hook.sh \
+	rpcbind umountnfs.sh udev udev-cache urandom dbus-1"
+
+for FF in $FFS ; do
+	if [ -e $INITD/$FF ] ; then
+		mv -f $INITD/$FF $INITD/$FF-bak
+	fi
+	sync
+done
+
+if [ $SYSTEMTYPE == "SDMIPI" ] ; then
+	[ -e $LIBTVDECODER ] || ln -sf libtvdecoder_s.so $LIBTVDECODER
+	insmod /home/tsh/modules/eventkey.ko &
+	insmod /home/tsh/modules/mxc_cap.ko
+	insmod /home/tsh/modules/sd_mipi.ko
+	fbset -vyres 1440
+else
+# elif [ $SYSTEMTYPE == "HDMIPI" ] ; then
+	[ -e $LIBTVDECODER ] || ln -sf libtvdecoder_h.so $LIBTVDECODER
+	insmod /home/tsh/modules/eventkey.ko event_enable=0 &
+#	for HD 25fps
+#	insmod /home/tsh/modules/xd_mipi.ko cam_width=1280 cam_height=720 cam_type=3 i2c_bus=2
+#	for HD 30fps
+#insmod /home/tsh/modules/xd_mipi.ko cam_width=1280 cam_height=720 cam_type=2 i2c_bus=2
+#	for SD PAL
+#insmod /home/tsh/modules/xd_mipi.ko cam_width=960 cam_height=240 cam_type=1 i2c_bus=2
+#	for SD NTSC
+#insmod /home/tsh/modules/xd_mipi.ko cam_width=960 cam_height=240 cam_type=0 i2c_bus=2
+#	for HD 9286
+insmod /home/tsh/modules/xd_mipi.ko cam_height=718 i2c_bus=2
+fi
+
+/home/tsh/bin/tshdelay &
+

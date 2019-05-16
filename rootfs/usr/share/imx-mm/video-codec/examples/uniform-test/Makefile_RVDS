@@ -1,0 +1,54 @@
+#*****************************************************************************
+#
+# uniform application for RVDS
+#
+#*****************************************************************************
+
+include ../../../build/Makefile_test.init
+
+DUT_LIBRARY=../bin/libDutDec.a
+UNIFORM_APP=../bin/test_dec_arm_elinux
+#CC=armcc
+#AS=armasm
+#LN=armlink
+
+CFLAGS = -g --dwarf2 --cpu ARM1136J-S --littleend --arm -O0 -DRVDS
+
+ifeq ($(MX31ADS_STANDALONE),1)
+	    AFLAGS += --PD "MX31ADS SETL {TRUE}"
+	    CFLAGS += --arm --enum_is_int
+	    LFLAGS += --scatter ../../../common/asm_arm/mx31/scat_a.txt --entry 0x80080000
+	    #ifeq ($(LEVEL2_PAGE),1)
+	    	AFLAGS += --PD "L2_TTB SETL {TRUE}"
+	    #endif
+	    C_OBJS += ../../../common/c_src/retarget.o
+      ASM_OBJS += ../../../common/asm_arm/mx31/initmmu.o
+	    ASM_OBJS += ../../../common/asm_arm/mx31/ttb.o
+endif
+
+C_OBJS += ../../../common/c_src/profile_utils.o
+
+INCLUDES    = -I./hdr -I../dut_hdr
+
+
+C_OBJS += ./src/test_dec_arm_elinux.o
+C_OBJS += ./src/render_lcd.o
+
+ALL_OBJS= $(C_OBJS) $(ASM_OBJS)
+
+all: $(ALL_OBJS) $(DUT_LIBRARY) $(UNIFORM_APP)
+	@+echo "--- dut wrapper build-all done ---"
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c  -o $@ $<
+
+%.o: %.s
+	$(AS) $(AFLAGS) -o $@ $<
+
+$(UNIFORM_APP):
+	@echo 'creating exe binary "$(UNIFORM_APP)"'
+	$(LN) -o $(UNIFORM_APP) $(LFLAGS) $(ALL_OBJS) $(DUT_LIBRARY)
+
+clean:
+	rm -f $(ALL_OBJS)
+	rm -f $(UNIFORM_APP)

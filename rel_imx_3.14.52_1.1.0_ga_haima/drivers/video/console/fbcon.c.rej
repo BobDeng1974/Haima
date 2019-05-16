@@ -1,0 +1,10 @@
+--- drivers/video/console/fbcon.c
++++ drivers/video/console/fbcon.c
+@@ -1304,7 +1302,6 @@
+ 
+ static void fbcon_cursor(struct vc_data *vc, int mode)
+ {
+-/*
+ 
+ 
+ 

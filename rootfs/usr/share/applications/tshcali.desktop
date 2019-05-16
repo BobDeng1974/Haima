@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=TSHCali
+GenericName=Surroundview Calibration
+GenericName[zh_CN]=全景标定
+Comment=360 Surroundview Calibration
+Comment[zh_CN]=全景标定
+Exec=/home/tsh/bin/tshcali
+Terminal=false
+Icon=/home/tsh/res/tshcali.png
+Type=Application

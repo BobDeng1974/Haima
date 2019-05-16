@@ -1,0 +1,14 @@
+prefix=/home/bamboo/build/3.14.52-1.1.0/fsl-imx-fb/temp_build_dir/build_fsl-imx-fb/tmp/sysroots/imx6qdlsolo/usr
+exec_prefix=${prefix}
+libdir=/usr/lib
+includedir=/usr/include/qt5
+
+
+Name: Qt5 MultimediaWidgets
+Description: Qt MultimediaWidgets module
+Version: 5.5.1
+Libs: -L${libdir} -lQt5MultimediaWidgets 
+Libs.private:  -lQt5Multimedia -lQt5Widgets -lQt5Gui -lQt5Network -lQt5Core -lpthread -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Core -lpthread -lGLESv2 -lEGL  
+Cflags: -I${includedir}/QtMultimediaWidgets -I${includedir}
+Requires: Qt5Core Qt5Gui Qt5Multimedia Qt5Widgets
+

@@ -1,0 +1,2 @@
+/usr/bin/readelf
+/usr/bin/arm-poky-linux-gnueabi-readelf 100

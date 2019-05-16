@@ -1,0 +1,61 @@
+#/*
+# ***********************************************************************
+# * Copyright 2005-2007 by Freescale Semiconductor, Inc.
+# * All modifications are confidential and proprietary information
+# * of Freescale Semiconductor, Inc. ALL RIGHTS RESERVED.
+# ***********************************************************************
+# */
+
+# Toolchain settings, derived directories and naming convention
+#
+# History
+#   Date           Changed                                      By
+#   Nov. 13, 2007  Port from Makefile.init, Makefile_test.init. Zhenyong Chen
+#                  Add ARM11ELINUXNORVDS, ARM12LERVDS     
+#
+#*****************************************************************************
+
+#****** Foreign variables ****************************************************
+# ROOT_DIR - root
+# BUILD    - toolchain combination
+# BIN_TYPE - binary type: LIB or DLL or EXE
+# __cplusplus - whether g++ will be used. Affects linker and default library
+
+
+#****** derived directories **************************************************
+# Library directory for codec libraries
+LIB_DIR = $(ROOT_DIR)/src/$(CODEC)
+# Common directory
+COMMON_DIR = $(ROOT_DIR)/common
+
+
+#****** Tool chain selection *************************************************
+BIN_TYPE ?= EXE
+include $(ROOT_DIR)/build/Makefile.toolchain.init
+
+#Define the include path
+INCLUDES   = -I$(ROOT_DIR)/ghdr -I$(COMMON_DIR)/hdr -I$(LIB_DIR)/hdr
+
+#****** Target naming ********************************************************
+PROGRAM = test_$(CODEC)_$(TGT_CPU_BIN)_$(TGT_OS_BIN)
+PROGRAM_DEC = test_$(CODEC)_dec_$(TGT_CPU_BIN)_$(TGT_OS_BIN)
+PROGRAM_ENC = test_$(CODEC)_enc_$(TGT_CPU_BIN)_$(TGT_OS_BIN)
+ifeq ($(TGT_OS),BERVDS)
+LIBRARY = $(LIB_DIR)/lib_$(CODEC)_$(TGT_CPU_BIN)_bervds.a $(TC_LIBRARY)
+LIBRARY_DEC = $(LIB_DIR)/lib_$(CODEC)_dec_$(TGT_CPU_BIN)_bervds.a $(TC_LIBRARY)
+LIBRARY_ENC = $(LIB_DIR)/lib_$(CODEC)_enc_$(TGT_CPU_BIN)_bervds.a $(TC_LIBRARY)
+else
+LIBRARY = $(LIB_DIR)/lib_$(CODEC)_$(TGT_CPU_BIN)_$(TGT_OS_BIN).a $(TC_LIBRARY)
+LIBRARY_DEC = $(LIB_DIR)/lib_$(CODEC)_dec_$(TGT_CPU_BIN)_$(TGT_OS_BIN).a $(TC_LIBRARY)
+LIBRARY_ENC = $(LIB_DIR)/lib_$(CODEC)_enc_$(TGT_CPU_BIN)_$(TGT_OS_BIN).a $(TC_LIBRARY)
+endif
+ifeq ($(LIB_TYPE),DYNAMIC)
+    LIBRARY = $(LIB_DIR)/lib_$(CODEC)_$(TGT_CPU_BIN)_$(TGT_OS_BIN).so $(TC_LIBRARY)
+    LIBRARY_DEC = $(LIB_DIR)/lib_$(CODEC)_dec_$(TGT_CPU_BIN)_$(TGT_OS_BIN).so $(TC_LIBRARY)
+    LIBRARY_ENC = $(LIB_DIR)/lib_$(CODEC)_enc_$(TGT_CPU_BIN)_$(TGT_OS_BIN).so $(TC_LIBRARY)
+endif
+
+#*****************************************************************************
+# Set the Common Defines DONE!!!
+#*****************************************************************************
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+echo '--should-not-have-used-/usr/bin/libpng16-config'
+exit 1

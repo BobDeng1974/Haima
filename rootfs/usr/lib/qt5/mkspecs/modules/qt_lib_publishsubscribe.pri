@@ -1,0 +1,17 @@
+QT.publishsubscribe.VERSION = 5.4.0
+QT.publishsubscribe.MAJOR_VERSION = 5
+QT.publishsubscribe.MINOR_VERSION = 4
+QT.publishsubscribe.PATCH_VERSION = 0
+QT.publishsubscribe.name = QtPublishSubscribe
+QT.publishsubscribe.libs = $$QT_MODULE_LIB_BASE
+QT.publishsubscribe.rpath = /usr/lib
+QT.publishsubscribe.includes = $$QT_MODULE_INCLUDE_BASE $$QT_MODULE_INCLUDE_BASE/QtPublishSubscribe
+QT.publishsubscribe.bins = $$QT_MODULE_BIN_BASE
+QT.publishsubscribe.libexecs = $$QT_MODULE_LIBEXEC_BASE
+QT.publishsubscribe.plugins = $$QT_MODULE_PLUGIN_BASE
+QT.publishsubscribe.imports = $$QT_MODULE_IMPORT_BASE
+QT.publishsubscribe.qml = $$QT_MODULE_QML_BASE
+QT.publishsubscribe.depends = core
+QT.publishsubscribe.module_config =
+QT.publishsubscribe.DEFINES = QT_PUBLISHSUBSCRIBE_LIB
+QT_MODULES += publishsubscribe

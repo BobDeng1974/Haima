@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include
+
+plugindir=${libdir}/ofono/plugins
+
+Name: ofono
+Description: oFono - Open Source Telephony
+Version: 1.16
+Requires: glib-2.0 dbus-1
+Cflags: -I${includedir}
+Libs: -module -avoid-version -export-symbols-regex 'ofono_plugin_desc'

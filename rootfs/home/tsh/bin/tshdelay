@@ -1,0 +1,19 @@
+#!/bin/sh
+/home/tsh/bin/tshproxy --protocol=0 --logfile=on,2,1 &
+/home/tsh/bin/switch --twokeymode=on > /home/tsh/log/tshmain.log 2>&1 &
+sleep 1.5
+
+if [ ! -e /var/lib/dbus/machine-id ] ; then
+	mkdir -p /var/lib/dbus
+	dbus-uuidgen --ensure
+fi
+
+/etc/init.d/udev-bak start
+/etc/init.d/urandom-bak start
+/home/chinagps/seg_start.sh &
+
+# modprobe g_ether
+# ifconfig lo 127.0.0.1 up
+# sleep 0.3
+# ifup usb0
+

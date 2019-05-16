@@ -1,0 +1,60 @@
+--- arch/arm/boot/dts/imx6qdl-sabresd.dtsi
++++ arch/arm/boot/dts/imx6qdl-sabresd.dtsi
+@@ -258,13 +258,6 @@
+ 		reset-delay-us = <50>;
+ 		#reset-cells = <0>;
+ 	};
+-
+-	adv739x_reset: adv739x-reset {
+-		compatible = "gpio-reset";
+-		reset-gpios = <&gpio1 16 GPIO_ACTIVE_LOW>;
+-		reset-delay-us = <400>;
+-		#reset-cells = <0>;
+-	};
+ };
+ 
+ &audmux {
+@@ -359,7 +352,7 @@
+ 		AVDD-supply = <&vgen3_reg>;  /* 2.8v, on rev C board is VGEN3,
+ 						on rev B board is VGEN5 */
+ 		DVDD-supply = <&vgen2_reg>;  /* 1.5v*/
+-		//pwn-gpios = <&gpio1 16 1>;   /* active low: SD1_DAT0 */
++		pwn-gpios = <&gpio1 16 1>;   /* active low: SD1_DAT0 */
+ 		rst-gpios = <&gpio1 17 0>;   /* active high: SD1_DAT1 */
+ 		csi_id = <0>;
+ 		mclk = <24000000>;
+@@ -501,15 +494,15 @@
+ 		mclk = <24000000>;
+ 		mclk_source = <0>;
+ 	};
+-	
+-	adv739x: adv739x@2b {
+-		compatible = "ADV,adv739x";
+-		reg = <0x2b>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_ipu1>;
+-		resets = <&adv739x_reset>;
+-		status = "okay";
++
++	egalax_ts@04 {
++		compatible = "eeti,egalax_ts";
++		reg = <0x04>;
++		interrupt-parent = <&gpio6>;
++		interrupts = <8 2>;
++		wakeup-gpios = <&gpio6 8 0>;
+ 	};
++
+ };
+ 
+ &i2c3 {
+@@ -570,8 +563,9 @@
+ 				MX6QDL_PAD_EIM_D23__GPIO3_IO23 0x80000000
+ 				MX6QDL_PAD_EIM_EB3__GPIO2_IO31 0x80000000
+ 				MX6QDL_PAD_SD1_CMD__GPIO1_IO18 0x80000000
+-				MX6QDL_PAD_SD1_DAT0__GPIO1_IO16 0x80000000	/* reset pin for adv739x */
+ 				MX6QDL_PAD_EIM_D16__GPIO3_IO16 0x80000000
++				MX6QDL_PAD_SD3_RST__GPIO7_IO08	0x80000000
++				MX6QDL_PAD_GPIO_9__GPIO1_IO09 	0x80000000
+ 				MX6QDL_PAD_EIM_DA9__GPIO3_IO09 0x80000000
+ 				MX6QDL_PAD_GPIO_1__WDOG2_B 0x80000000
+ 				MX6QDL_PAD_NANDF_CS0__GPIO6_IO11 0x80000000

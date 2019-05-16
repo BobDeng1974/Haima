@@ -1,0 +1,12 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include/gstreamer-1.0
+
+Name: GStreamer codec parsers
+Description: Bitstream parsers for GStreamer elements
+Requires: gstreamer-1.0 gstreamer-base-1.0
+Version: 1.4.5
+Libs: -L${libdir} -lgstcodecparsers-1.0
+Cflags: -I${includedir}
+

@@ -1,0 +1,14 @@
+arm-poky-linux-gnueabi
+imx6qdlsolo-.*-linux.*
+cortexa9t2hf_vfp_neon_mx6qdl-.*-linux.*
+cortexa9hf_vfp_neon_mx6qdl-.*-linux.*
+cortexa9hf_vfp_neon-.*-linux.*
+cortexa9hf_vfp-.*-linux.*
+armv7ahf_vfp_neon-.*-linux.*
+armv7ahf_vfp-.*-linux.*
+armv6hf_vfp-.*-linux.*
+armv5ehf_vfp-.*-linux.*
+armv5hf_vfp-.*-linux.*
+noarch-.*-linux.*
+any-.*-linux.*
+all-.*-linux.*

@@ -1,0 +1,161 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: SVM
+
+
+BO_ 556 BCM_BD_FrP01: 8 Vector__XXX
+ SG_ DirLampLeftSwitchStsBDCAN_BD : 27|1@0+ (1,0) [0|0] ""  SVM
+ SG_ DirLampRightSwitchStsBDCAN_BD : 13|1@0+ (1,0) [0|0] ""  SVM
+ SG_ RsvGearSwitchStsBDCAN_BD : 6|1@0+ (1,0) [0|0] ""  SVM
+
+BO_ 980 BCM_BD_FrP04: 6 Vector__XXX
+ SG_ StrWhlAngle_BD : 22|15@0+ (0.1,0) [0|780] "degree"  SVM
+ SG_ StrWhlAngleSign_BD : 23|1@0+ (1,0) [0|0] ""  SVM
+ SG_ StrWhlSpd_BD : 38|15@0+ (0.1,0) [0|1016] "degree/s"  SVM
+ SG_ StrWhlSpdSign_BD : 39|1@0+ (1,0) [0|0] ""  SVM
+
+BO_ 503 BCM_BD_FrP05: 8 Vector__XXX
+ SG_ GearSelDisp_BD : 27|4@0+ (1,0) [0|0] ""  SVM
+ SG_ VehSpd_BD : 52|13@0+ (0.05625,0) [0|360] "km/h"  SVM
+ SG_ VehSpdVd_BD : 53|1@0+ (1,0) [0|0] ""  SVM
+
+BO_ 1874 DIAG_SVM_REQ: 8 Vector__XXX
+ SG_ Diag_SVM_Req_Sig_BD_b0 : 7|8@0+ (1,0) [0|0] ""  SVM
+ SG_ Diag_SVM_Req_Sig_BD_b1 : 15|8@0+ (1,0) [0|0] ""  SVM
+ SG_ Diag_SVM_Req_Sig_BD_b2 : 23|8@0+ (1,0) [0|0] ""  SVM
+ SG_ Diag_SVM_Req_Sig_BD_b3 : 31|8@0+ (1,0) [0|0] ""  SVM
+ SG_ Diag_SVM_Req_Sig_BD_b4 : 39|8@0+ (1,0) [0|0] ""  SVM
+ SG_ Diag_SVM_Req_Sig_BD_b5 : 47|8@0+ (1,0) [0|0] ""  SVM
+ SG_ Diag_SVM_Req_Sig_BD_b6 : 55|8@0+ (1,0) [0|0] ""  SVM
+ SG_ Diag_SVM_Req_Sig_BD_b7 : 63|8@0+ (1,0) [0|0] ""  SVM
+
+BO_ 1875 DIAG_SVM_RESP: 8 SVM
+ SG_ Diag_SVM_Resp_Sig_BD_b0 : 7|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Diag_SVM_Resp_Sig_BD_b1 : 15|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Diag_SVM_Resp_Sig_BD_b2 : 23|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Diag_SVM_Resp_Sig_BD_b3 : 31|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Diag_SVM_Resp_Sig_BD_b4 : 39|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Diag_SVM_Resp_Sig_BD_b5 : 47|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Diag_SVM_Resp_Sig_BD_b6 : 55|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Diag_SVM_Resp_Sig_BD_b7 : 63|8@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 1337 IST_BD_FrP00: 4 Vector__XXX
+ SG_ Avm2D3DSwitch_BD : 31|1@0+ (1,0) [0|0] ""  SVM
+ SG_ AvmGuidesSet_BD : 21|2@0+ (1,0) [0|0] ""  SVM
+ SG_ AVM_LDW_SET_BD : 14|2@0+ (1,0) [0|0] ""  SVM
+ SG_ SET_CAR_color_BD : 30|3@0+ (1,0) [0|0] ""  SVM
+ SG_ TouScrPreKey2_BD : 12|5@0+ (1,0) [19|31] "Reserved(预留)"  SVM
+
+BO_ 1730 IST_BD_FrS00_Cal: 8 Vector__XXX
+ SG_ AVMOneKeyCaltion_BD : 39|32@0+ (1,0) [0|0] ""  SVM
+ SG_ AVMOneKeyCaltionVd_BD : 24|1@0+ (1,0) [0|0] ""  SVM
+
+BO_ 1425 SVM_BD_FrP00: 8 SVM
+ SG_ AvmGuidesSts_BD : 54|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ GET_Car_color_BD : 39|3@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ SET_AVM_DISP_BD : 49|2@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ SVM_CalibrateSt_BD : 62|3@0+ (1,0) [4|7] "Reserved" Vector__XXX
+ SG_ SVM_FrontCamFail_BD : 53|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ SVM_LanedepartureSt_BD : 42|3@0+ (1,0) [5|7] "Reserved" Vector__XXX
+ SG_ SVM_LeftCamFail_BD : 51|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ SVM_RearCamaFail_BD : 52|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ SVM_RightCamFail_BD : 50|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ SVM_ViewSt_BD : 59|4@0+ (1,0) [7|15] "Reserved" Vector__XXX
+ SG_ SVM_ViewSt2_BD : 36|5@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ SVM_Workst_BD : 63|1@0+ (1,0) [0|0] "" Vector__XXX
+
+
+
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BO_  "GenMsgDelayTime" FLOAT 0 300000;
+BA_DEF_ BO_  "GenMsgCycleTime" FLOAT 0 300000;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "cyclic","spontaneous","cyclicIfActive","spontaneousWithDelay";
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "GenMsgSendType" "";
+BA_ "BusType" "CAN";
+BA_ "GenMsgSendType" BO_ 556 0;
+BA_ "GenMsgCycleTime" BO_ 556 50;
+BA_ "GenMsgDelayTime" BO_ 556 0;
+BA_ "GenMsgSendType" BO_ 980 0;
+BA_ "GenMsgCycleTime" BO_ 980 20;
+BA_ "GenMsgDelayTime" BO_ 980 0;
+BA_ "GenMsgSendType" BO_ 503 0;
+BA_ "GenMsgCycleTime" BO_ 503 100;
+BA_ "GenMsgDelayTime" BO_ 503 0;
+BA_ "GenMsgSendType" BO_ 1874 1;
+BA_ "GenMsgCycleTime" BO_ 1874 0;
+BA_ "GenMsgSendType" BO_ 1875 1;
+BA_ "GenMsgCycleTime" BO_ 1875 0;
+BA_ "GenMsgSendType" BO_ 1337 0;
+BA_ "GenMsgCycleTime" BO_ 1337 100;
+BA_ "GenMsgDelayTime" BO_ 1337 0;
+BA_ "GenMsgCycleTime" BO_ 1730 1000;
+BA_ "GenMsgSendType" BO_ 1730 0;
+BA_ "GenMsgSendType" BO_ 1425 0;
+BA_ "GenMsgCycleTime" BO_ 1425 400;
+BA_ "GenMsgDelayTime" BO_ 1425 0;
+VAL_ 556 DirLampLeftSwitchStsBDCAN_BD 0 "off" 1 "on" ;
+VAL_ 556 DirLampRightSwitchStsBDCAN_BD 0 "off" 1 "on" ;
+VAL_ 556 RsvGearSwitchStsBDCAN_BD 0 "off" 1 "on" ;
+VAL_ 980 StrWhlAngle_BD 0 "degree (0x0 - 0x1E78)" 7801 "Error (0x1E79 - 0x7FFE)" 32767 "default" ;
+VAL_ 980 StrWhlAngleSign_BD 0 "Left(Positive)" 1 "Right(Negative)" ;
+VAL_ 980 StrWhlSpd_BD 0 "degree/s (0x0 - 0x27B0)" 10161 "Error (0x27B1 - 0x7FFE)" 32767 "default" ;
+VAL_ 980 StrWhlSpdSign_BD 0 "Left(Positive)" 1 "Right(Negative)" ;
+VAL_ 503 GearSelDisp_BD 0 "p" 1 "Not used" 2 "Not used" 3 "Not used" 4 "Not used" 5 "D" 6 "N" 7 "R" 8 "manual mode" 9 "Not used" 10 "Not used" 11 "Not used" 12 "Not used" 13 "Not used" 14 "Not used" 15 "Fault" ;
+VAL_ 503 VehSpd_BD 0 "km/h (0x0 - 0x1900)" ;
+VAL_ 503 VehSpdVd_BD 0 "invalid" 1 "valid" ;
+VAL_ 1337 Avm2D3DSwitch_BD 0 "2D" 1 "3D" ;
+VAL_ 1337 AvmGuidesSet_BD 0 "Default" 1 "OFF( 关)" 2 "ON(开)" ;
+VAL_ 1337 AVM_LDW_SET_BD 0 "Default" 1 "OFF( 关)" 2 "ON(开)" ;
+VAL_ 1337 SET_CAR_color_BD 0 "无效" 1 "颜色1" 2 "颜色2" 3 "颜色3" 4 "颜色4" 5 "颜色5" 6 "待定" ;
+VAL_ 1337 TouScrPreKey2_BD 19 "Reserved(预留) (0x13 - 0x1F)" 0 "无效" 1 "2D前视视角+拼接" 2 "2D后视视角+拼接" 3 "2D左视视角+拼接" 4 "2D右视视角+拼接" 5 "3D前视视角+拼接" 6 "3D右前视角+拼接" 7 "3D右后视角+拼接" 8 "3D后视视角+拼接" 9 "3D左后视角+拼接" 10 "3D左前视角+拼接" 11 "3D倒车视角+拼接" 12 "3D自定义角度视角+拼接" 13 "显示宽视角（默认）" 14 "显示宽视角（前）" 15 "显示宽视角（后）" 16 "Enter AVM Key Press" 17 "Exit AVM Key Press" 18 "3D/2D  mode" ;
+VAL_ 1730 AVMOneKeyCaltion_BD -1437226411 "打开视频标定" 1437226410 "关闭视频标定（360在接收到标定信号时，发送标定视频信息给音响做显" ;
+VAL_ 1730 AVMOneKeyCaltionVd_BD 0 "invalid" 1 "valid" ;
+VAL_ 1425 AvmGuidesSts_BD 0 "OFF(关)" 1 "ON( 开)" ;
+VAL_ 1425 GET_Car_color_BD 0 "无效" 1 "颜色1" 2 "颜色2" 3 "颜色3" 4 "颜色4" 5 "颜色5" 6 "待定" ;
+VAL_ 1425 SET_AVM_DISP_BD 0 "无效" 1 "打开" 2 "关闭" ;
+VAL_ 1425 SVM_CalibrateSt_BD 4 "Reserved (0x4 - 0x7)" 0 "Not calibrate" 1 "Claibrating" 2 "Claibrate success" 3 "Calibrate failure" ;
+VAL_ 1425 SVM_FrontCamFail_BD 0 "Not fail" 1 "Fail" ;
+VAL_ 1425 SVM_LanedepartureSt_BD 0 "Off" 1 "Not departure" 2 "Left departure" 3 "Right departure" 5 "Reserved (0x5 - 0x7)" 4 "Indeterminacy departure(未确认左右的偏离)" ;
+VAL_ 1425 SVM_LeftCamFail_BD 0 "Not fail" 1 "Fail" ;
+VAL_ 1425 SVM_RearCamaFail_BD 0 "Not fail" 1 "Fail" ;
+VAL_ 1425 SVM_RightCamFail_BD 0 "Not fail" 1 "Fail" ;
+VAL_ 1425 SVM_ViewSt_BD 7 "Reserved (0x7 - 0xF)" 0 "Off" 1 "Around View and front view" 2 "Around View and rear view" 3 "Around View and left view" 4 "Around View and right view" 5 "DVR(Reserved)行车记录仪预留" 6 "LDWS(车道偏离)" ;
+VAL_ 1425 SVM_ViewSt2_BD 7 "3D右后视角+拼接" 0 "无效" 1 "2D前视视角+拼接" 2 "2D后视视角+拼接" 3 "2D左视视角+拼接" 4 "2D右视视角+拼接" 5 "3D前视视角+拼接" 6 "3D右前视角+拼接" 8 "3D后视视角+拼接" 9 "3D左后视角+拼接" 10 "3D左前视角+拼接" 11 "3D倒车视角+拼接" 12 "3D自定义角度视角+拼接" 14 "显示宽视角（前）" 13 "显示宽视角（默认" 15 "显示宽视角（后）" 16 "Reserved(预留) (0x10 - 0x1F)" ;
+VAL_ 1425 SVM_Workst_BD 0 "Not active" 1 "Active" ;
+

@@ -1,0 +1,112 @@
+# AMD Family 15h processor performance events
+#
+# Copyright OProfile authors
+# Copyright (c) 2006-2011 Advanced Micro Devices
+# Contributed by Ray Bryant <raybry at amd.com>,
+#		Jason Yeh <jason.yeh at amd.com>
+#		Suravee Suthikulpanit <suravee.suthikulpanit at amd.com>
+#		Paul Drongowski <paul.drongowski at amd.com>
+#
+# Sources: BIOS and Kernel Developer's Guide for AMD Family 15h Models 00h-0Fh Processors,
+#          Publication# 42301, Revision 1.12, February 16, 2011
+#
+# Revision: 1.4
+#
+# ChangeLog: 
+# 	1.4: 11 August 2014
+# 	- Remove IBS events due to missing support in Operf
+#
+# 	1.3: 9 March 2011
+# 	- Update to BKDG Rev 1.12 (still preliminary)
+#
+#	1.2: 25 Januray 2011
+#	- Updated to BKDG Rev 1.09 (still preliminary)
+# 	- Update minimum value for RETIRED_UOPS
+#
+#	1.1: 2 December 2010
+#	- Updated to BKDG Rev 1.06 (still preliminary)
+#
+#	1.0: 28 May 2010
+# 	- Preliminary version
+event:0x000 counters:3 um:fpu_ops minimum:500 name:DISPATCHED_FPU_OPS : FPU Pipe Assignment
+event:0x001 counters:3,4,5 um:zero minimum:500 name:CYCLES_FPU_EMPTY : FP Scheduler Empty
+event:0x003 counters:3 um:sse_ops minimum:500 name:RETIRED_SSE_OPS : Retired SSE/BNI Ops
+event:0x004 counters:3 um:move_ops minimum:500 name:MOVE_SCALAR_OPTIMIZATION : Number of Move Elimination and Scalar Op Optimization
+event:0x005 counters:3,4,5 um:serial_ops minimum:500 name:RETIRED_SERIALIZING_OPS : Retired Serializing Ops
+event:0x006 counters:3,4,5 um:zero minimum:500 name:BOTTOM_EXECUTE_OP : Number of Cycles that a Bottom-Execute uop is in the FP Scheduler
+event:0x020 counters:0,1,2,3,4,5 um:segregload minimum:500 name:SEGMENT_REGISTER_LOADS : Segment Register Loads
+event:0x021 counters:0,1,2,3,4,5 um:zero minimum:500 name:PIPELINE_RESTART_DUE_TO_SELF_MODIFYING_CODE : Pipeline Restart Due to Self-Modifying Code
+event:0x022 counters:0,1,2,3,4,5 um:zero minimum:500 name:PIPELINE_RESTART_DUE_TO_PROBE_HIT : Pipeline Restart Due to Probe Hit
+event:0x023 counters:0,1,2 um:loadq_storeq minimum:500 name:LOAD_Q_STORE_Q_FULL : Load Queue/Store Queue Full
+event:0x024 counters:0,1,2,3,4,5 um:lock_ops minimum:500 name:LOCKED_OPS : Locked Operations
+event:0x026 counters:0,1,2,3,4,5 um:zero minimum:500 name:RETIRED_CLFLUSH_INSTRUCTIONS : Retired CLFLUSH Instructions
+event:0x027 counters:0,1,2,3,4,5 um:zero minimum:500 name:RETIRED_CPUID_INSTRUCTIONS : Retired CPUID Instructions
+event:0x029 counters:0,1,2,3,4,5 um:ls_dispatch minimum:500 name:LS_DISPATCH : LS Dispatch
+event:0x02a counters:0,1,2,3,4,5 um:store_to_load minimum:500 name:CANCELLED_STORE_TO_LOAD : Canceled Store to Load Forward Operations
+event:0x02b counters:0,1,2,3,4,5 um:zero minimum:500 name:SMIS_RECEIVED : SMIs Received
+event:0x030 counters:0,1,2,3,4,5 um:zero minimum:500 name:EXECUTED_CFLUSH_INST : Executed CLFLUSH Instructions
+event:0x040 counters:0,1,2,3,4,5 um:zero minimum:500 name:DATA_CACHE_ACCESSES : Data Cache Accesses
+event:0x041 counters:0,1,2,3,4,5 um:dcache_misses minimum:500 name:DATA_CACHE_MISSES : Data Cache Misses
+event:0x042 counters:0,1,2,3,4,5 um:dcache_refills minimum:500 name:DATA_CACHE_REFILLS_FROM_L2_OR_NORTHBRIDGE : Data Cache Refills from L2 or System
+event:0x043 counters:0,1,2 um:zero minimum:500 name:DATA_CACHE_REFILLS_FROM_NORTHBRIDGE : Data Cache Refills from System
+event:0x045 counters:0,1,2 um:unified_tlb_hit minimum:50000 name:UNIFIED_TLB_HIT : Unified TLB Hit
+event:0x046 counters:0,1,2 um:unified_tlb_miss minimum:500 name:UNIFIED_TLB_MISS : Unified TLB Miss
+event:0x047 counters:0,1,2,3,4,5 um:zero minimum:500 name:MISALIGNED_ACCESSES : Misaligned Accesses
+event:0x04b counters:0,1,2,3,4,5 um:prefetch minimum:500 name:PREFETCH_INSTRUCTIONS_DISPATCHED : Prefetch Instructions Dispatched
+event:0x052 counters:0,1,2,3,4,5 um:soft_prefetch minimum:500 name:INEFFECTIVE_SW_PREFETCHES : Ineffective Software Prefetches
+event:0x065 counters:0,1,2 um:memreqtype minimum:500 name:MEMORY_REQUESTS : Memory Requests by Type
+event:0x067 counters:0,1,2 um:dataprefetch minimum:500 name:DATA_PREFETCHER : Data Prefetcher
+event:0x068 counters:0,1,2 um:buffer_id minimum:500 name:MAB_REQS : MAB Requests
+event:0x069 counters:0,1,2 um:buffer_id minimum:500 name:MAB_WAIT : MAB Wait Cycles
+event:0x06c counters:0,1,2 um:systemreadresponse minimum:500 name:SYSTEM_READ_RESPONSES : Response From System on Cache Refills
+event:0x06d counters:0,1,2 um:octword_transfer minimum:500 name:OCTWORD_WRITE_TRANSFERS : Octwords Written to System
+event:0x076 counters:0,1,2 um:zero minimum:50000 name:CPU_CLK_UNHALTED : CPU Clocks not Halted
+event:0x07d counters:0,1,2 um:l2_internal minimum:500 name:REQUESTS_TO_L2 : Requests to L2 Cache
+event:0x07e counters:0,1,2 um:l2_req_miss minimum:500 name:L2_CACHE_MISS : L2 Cache Misses
+event:0x07f counters:0,1,2 um:l2_fill minimum:500 name:L2_CACHE_FILL_WRITEBACK : L2 Fill/Writeback
+event:0x165 counters:0,1,2 um:page_size_mismatches minimum:500 name:PAGE_SPLINTERING : Page Splintering
+event:0x16c counters:0,1,2 um:l2_prefetcher_trigger minimum:500 name:L2_PREFETCHER_TRIGGER : L2 Prefetcher Trigger Events
+event:0x080 counters:0,1,2 um:zero minimum:500 name:INSTRUCTION_CACHE_FETCHES : Instruction Cache Fetches
+event:0x081 counters:0,1,2 um:zero minimum:500 name:INSTRUCTION_CACHE_MISSES : Instruction Cache Misses
+event:0x082 counters:0,1,2 um:zero minimum:500 name:INSTRUCTION_CACHE_REFILLS_FROM_L2 : Instruction Cache Refills from L2
+event:0x083 counters:0,1,2 um:zero minimum:500 name:INSTRUCTION_CACHE_REFILLS_FROM_SYSTEM : Instruction Cache Refills from System
+event:0x084 counters:0,1,2 um:zero minimum:500 name:L1_ITLB_MISS_AND_L2_ITLB_HIT : L1 ITLB Miss, L2 ITLB Hit
+event:0x085 counters:0,1,2 um:l1_l2_itlb_miss minimum:500 name:L1_ITLB_MISS_AND_L2_ITLB_MISS : L1 ITLB Miss, L2 ITLB Miss
+event:0x086 counters:0,1,2 um:zero minimum:500 name:PIPELINE_RESTART_DUE_TO_INSTRUCTION_STREAM_PROBE : Pipeline Restart Due to Instruction Stream Probe
+event:0x087 counters:0,1,2 um:zero minimum:500 name:INSTRUCTION_FETCH_STALL : Instruction Fetch Stall
+event:0x088 counters:0,1,2 um:zero minimum:500 name:RETURN_STACK_HITS : Return Stack Hits
+event:0x089 counters:0,1,2 um:zero minimum:500 name:RETURN_STACK_OVERFLOWS : Return Stack Overflows
+event:0x08b counters:0,1,2 um:zero minimum:500 name:INSTRUCTION_CACHE_VICTIMS : Instruction Cache Victims
+event:0x08c counters:0,1,2 um:icache_invalidated minimum:500 name:INSTRUCTION_CACHE_INVALIDATED : Instruction Cache Lines Invalidated
+event:0x099 counters:0,1,2 um:zero minimum:500 name:ITLB_RELOADS : ITLB Reloads
+event:0x09a counters:0,1,2 um:zero minimum:500 name:ITLB_RELOADS_ABORTED : ITLB Reloads Aborted
+event:0x0c0 counters:0,1,2,3,4,5 um:zero minimum:50000 name:RETIRED_INSTRUCTIONS : Retired Instructions
+event:0x0c1 counters:0,1,2,3,4,5 um:zero minimum:50000 name:RETIRED_UOPS : Retired uops
+event:0x0c2 counters:0,1,2,3,4,5 um:zero minimum:500 name:RETIRED_BRANCH_INSTRUCTIONS : Retired Branch Instructions
+event:0x0c3 counters:0,1,2,3,4,5 um:zero minimum:500 name:RETIRED_MISPREDICTED_BRANCH_INSTRUCTIONS : Retired Mispredicted Branch Instructions
+event:0x0c4 counters:0,1,2,3,4,5 um:zero minimum:500 name:RETIRED_TAKEN_BRANCH_INSTRUCTIONS : Retired Taken Branch Instructions
+event:0x0c5 counters:0,1,2,3,4,5 um:zero minimum:500 name:RETIRED_TAKEN_BRANCH_INSTRUCTIONS_MISPREDICTED : Retired Taken Branch Instructions Mispredicted
+event:0x0c6 counters:0,1,2,3,4,5 um:zero minimum:500 name:RETIRED_FAR_CONTROL_TRANSFERS : Retired Far Control Transfers
+event:0x0c7 counters:0,1,2,3,4,5 um:zero minimum:500 name:RETIRED_BRANCH_RESYNCS : Retired Branch Resyncs
+event:0x0c8 counters:0,1,2,3,4,5 um:zero minimum:500 name:RETIRED_NEAR_RETURNS : Retired Near Returns
+event:0x0c9 counters:0,1,2,3,4,5 um:zero minimum:500 name:RETIRED_NEAR_RETURNS_MISPREDICTED : Retired Near Returns Mispredicted
+event:0x0ca counters:0,1,2,3,4,5 um:zero minimum:500 name:RETIRED_INDIRECT_BRANCHES_MISPREDICTED : Retired Indirect Branches Mispredicted
+event:0x0cb counters:0,1,2,3,4,5 um:fpu_instr minimum:500 name:RETIRED_MMX_FP_INSTRUCTIONS : Retired MMX/FP Instructions
+event:0x0cd counters:0,1,2,3,4,5 um:zero minimum:500 name:INTERRUPTS_MASKED_CYCLES : Interrupts-Masked Cycles
+event:0x0ce counters:0,1,2,3,4,5 um:zero minimum:500 name:INTERRUPTS_MASKED_CYCLES_WITH_INTERRUPT_PENDING : Interrupts-Masked Cycles with Interrupt Pending
+event:0x0cf counters:0,1,2,3,4,5 um:zero minimum:500 name:INTERRUPTS_TAKEN : Interrupts Taken
+event:0x0d0 counters:0,1,2 um:zero minimum:500 name:DECODER_EMPTY : Decoder Empty
+event:0x0d1 counters:0,1,2 um:zero minimum:500 name:DISPATCH_STALLS : Dispatch Stalls
+event:0x0d3 counters:0,1,2 um:zero minimum:500 name:DISPATCH_STALL_FOR_SERIALIZATION : Microsequencer Stall due to Serialization
+event:0x0d5 counters:0,1,2 um:zero minimum:500 name:DISPATCH_STALL_FOR_RETIRE_QUEUE_FULL : Dispatch Stall for Instruction Retire Q Full
+event:0x0d6 counters:0,1,2 um:zero minimum:500 name:DISPATCH_STALL_FOR_INT_SCHED_QUEUE_FULL : Dispatch Stall for Integer Scheduler Queue Full
+event:0x0d7 counters:0,1,2 um:zero minimum:500 name:DISPATCH_STALL_FOR_FPU_FULL : Dispatch Stall for FP Scheduler Queue Full
+event:0x0d8 counters:0,1,2 um:zero minimum:500 name:DISPATCH_STALL_FOR_LDQ_FULL : Dispatch Stall for LDQ Full
+event:0x0d9 counters:0,1,2 um:zero minimum:500 name:MICROSEQ_STALL_WAITING_FOR_ALL_QUIET : Microsequencer Stall Waiting for All Quiet
+event:0x0db counters:0,1,2,3,4,5 um:fpu_exceptions minimum:500 name:FPU_EXCEPTIONS : FPU Exceptions
+event:0x0dc counters:0,1,2,3,4,5 um:zero minimum:500 name:DR0_BREAKPOINTS : DR0 Breakpoint Match
+event:0x0dd counters:0,1,2,3,4,5 um:zero minimum:500 name:DR1_BREAKPOINTS : DR1 Breakpoint Match
+event:0x0de counters:0,1,2,3,4,5 um:zero minimum:500 name:DR2_BREAKPOINTS : DR2 Breakpoint Match
+event:0x0df counters:0,1,2,3,4,5 um:zero minimum:500 name:DR3_BREAKPOINTS : DR3 Breakpoint Match
+event:0x1cf counters:0,1,2,3,4,5 um:ibs_ops_tagged minimum:50000 name:IBS_OPS_TAGGED : Tagged IBS Ops
+event:0x1d8 counters:0,1,2,3,4,5 um:zero minimum:500 name:DISPATCH_STALL_FOR_STQ_FULL : Dispatch Stall for STQ Full

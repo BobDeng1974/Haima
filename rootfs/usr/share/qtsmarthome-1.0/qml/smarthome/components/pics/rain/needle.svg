@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="8"
+   height="50"
+   viewBox="0 0 8 50"
+   id="Ebene_1"
+   xml:space="preserve"><defs
+   id="defs7"><filter
+     x="-0.63264096"
+     y="-0.04994534"
+     width="2.2652819"
+     height="1.0998907"
+     color-interpolation-filters="sRGB"
+     id="filter3613"><feGaussianBlur
+       id="feGaussianBlur3615"
+       stdDeviation="0.79080119" /></filter></defs>
+<rect
+   width="3"
+   height="38"
+   x="1"
+   y="2"
+   id="rect3"
+   style="fill:#ffffff" /><rect
+   width="3"
+   height="38"
+   x="2.1779661"
+   y="3.6822033"
+   id="rect2819"
+   style="opacity:0.81981979;fill:#000000;fill-opacity:1;filter:url(#filter3613)" />
+<rect
+   width="3"
+   height="38"
+   x="1"
+   y="2"
+   id="rect2817"
+   style="fill:#ffffff;fill-opacity:1" /></svg>

@@ -1,0 +1,16 @@
+/run/media/mmcblk1p1
+60
+20
+off
+off
+off
+global
+5
+0,10,10
+on
+on
+on
+
+
+
+on,on
